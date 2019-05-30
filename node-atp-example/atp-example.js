@@ -26,8 +26,7 @@ class AtpDataCollectionHelper {
                 }
             });
 
-            this.liveRankingResultsHtml = res;
-            console.log('Got results.');
+            this.liveRankingResultsHtml = res.data;
         } catch (error) {
             console.log(error);
         }
@@ -42,13 +41,31 @@ const server = http.createServer(async (req, res) => {
     const dataCollectionHelper = new AtpDataCollectionHelper('https://live-tennis.eu/en/atp-live-ranking');
     await dataCollectionHelper.getResults();
 
-    // Quick test of cheerio
-    // console.log('Using results.');
-    // console.log(dataCollectionHelper.liveRankingResultsHtml);
-    // const $ = cheerio.load('<div>test</div>');
-    // console.log($.text());
-    console.log('Using results.')
-    console.log(dataCollectionHelper.liveRankingResultsHtml);
+    // Confirm that the data type is of type 'string' (dummy)
+    console.log(`Results data type: ${typeof dataCollectionHelper.liveRankingResultsHtml}`);
+
+    // Use cheeriojs to obtain the 'ranking' HTML table (just going for the first 10 results, for now) - just want to inspect the text, as a test
+    const $ = cheerio.load(dataCollectionHelper.liveRankingResultsHtml);
+    const elements = $('#u868').children('tbody').find('tr');
+
+    // Temp code only - attempt to scrape the HTML using fairly fast/loose index based grabs on td text
+    const playerDetailsTemp = [];
+
+    elements.slice(0, 20).each((i, elem) => {
+        if (i % 2 === 0) {
+            playerDetailsTemp.push({
+                rank: parseInt($(elem).find('td').eq(0).text().trim()),
+                name: $(elem).find('td').eq(3).text(),
+                age: Math.floor(parseFloat($(elem).find('td').eq(4).text())),
+                country: $(elem).find('td').eq(5).text(),
+                points: parseInt($(elem).find('td').eq(6).text()),
+            });
+        }
+    });
+
+    // Again, return result as JSON, for now (until we do some proper templating/routing, etc.)
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify(playerDetailsTemp));
 });
 server.listen(1337, '127.0.0.1', () => {
     console.log('Server started. Listening on 127.0.0.1 on port 1337...');
