@@ -1,0 +1,22 @@
+{
+  "name": "atpliverankings",
+  "version": "1.0.0",
+  "description": "NodeJS portfolio sample app",
+  "main": "atp-example.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "ejs": "^2.6.1",
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r esm atp-example.js"
+  },
+  "author": "Lewis Grint",
+  "license": "ISC"
+}

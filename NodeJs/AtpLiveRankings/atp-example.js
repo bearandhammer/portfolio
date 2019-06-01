@@ -1,6 +1,6 @@
 // Excellent tutorial for using import/export (ES6 gubbins) here! https://timonweb.com/tutorials/how-to-enable-ecmascript-6-imports-in-nodejs/
-import AtpDataCollectionHelper from "./Models/AtpDataCollectionHelper";
-import { httpUtils } from "./Utility/base";
+import AtpDataCollectionHelper from "./models/AtpDataCollectionHelper";
+import { httpUtils } from "./utility/base";
 
 // Use 'express' for our stock server (handles routing, etc.)
 const express = require('express');
