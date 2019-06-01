@@ -9,6 +9,8 @@ const express = require('express');
 const debug = true;
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.get('/', async (req, res) => {
     if (debug) {
         console.log('Request logged for a resource...');
@@ -25,9 +27,15 @@ app.get('/', async (req, res) => {
 
     const playerDetailsTemp = dataCollectionHelper.getPlayerJsonFromHtml();
 
-    // Again, return result as JSON, for now (until we do some proper templating/routing, etc.)
-    res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify(playerDetailsTemp));
+    // Temp
+    // // Again, return result as JSON, for now (until we do some proper templating/routing, etc.)
+    // res.setHeader('Content-Type', 'application/json')
+    // res.send(JSON.stringify(playerDetailsTemp));
+
+    // EJS test run
+    res.render('overview', { 
+        playerData: playerDetailsTemp
+    });
 });
 
 // Kick off our server!
