@@ -1,4 +1,4 @@
-import { elementSelectors, httpUtils } from '../Utility/base';
+import { elementSelectors, httpUtils } from '../utility/base';
 
 // Axios (AJAX for returning live ranking HTML 'raw' data)  and Cheerio included to scrape HTML and provide manipulated content
 const axios = require('axios');
