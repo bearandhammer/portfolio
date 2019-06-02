@@ -1,0 +1,28 @@
+<% if (playerData && playerData.length > 0){ %>
+    <div class="table-wrapper">
+        <table class="table table-hover table-dark">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Country</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% playerData.forEach(player => { %>
+                <tr class="player-row">
+                    <td><%= player.rank %></td>
+                    <td><%= player.name %></td>
+                    <td><%= player.age %></td>
+                    <td><%= player.country %></td>
+                    <td><%= player.points %></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+<% } else { %>  
+    <p>Player Data is not available...</p>
+<% } %>
