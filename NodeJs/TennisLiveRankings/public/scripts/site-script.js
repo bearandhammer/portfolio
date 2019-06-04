@@ -1,5 +1,5 @@
 document.querySelector('#table-container').addEventListener('click', e => {
     if (e.target.matches('.player-row, .player-row *')) {
-        // TODO
+        window.location.href = `/profile?name=${ e.target.closest('.player-row').children[1].innerText.trim() }`;
     }
 });

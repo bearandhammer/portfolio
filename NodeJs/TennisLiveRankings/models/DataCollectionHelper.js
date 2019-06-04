@@ -27,9 +27,9 @@ export default class DataCollectionHelper {
         }
     }
 
-    async getSpecificPlayerResults() {
+    async getSpecificPlayerResults(name) {
         try {
-            const res = await axios.get(`${this.proxy}https://www.google.com/search?safe=off&q=atp+tour+john+isner`, { 
+            const res = await axios.get(`${this.proxy}https://www.google.com/search?safe=off&q=atp+tour+${ name }`, { 
                 crossdomain: true, 
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -43,20 +43,23 @@ export default class DataCollectionHelper {
     }
 
     getPlayerLink() {
+        let physicalLink = '';
+
         if (this.specificPlayerResults) {
             const $ = cheerio.load(this.specificPlayerResults);
             const urlHref = $("a[href*='https://www.atptour.com/en/players/'][href*='/overview']").attr('href');
             
             if (urlHref) {
-                const physicalUrl = urlHref.substring(urlHref.indexOf('https'), urlHref.indexOf('&sa='));
+                physicalLink = urlHref.substring(urlHref.indexOf('https'), urlHref.indexOf('&sa='));
 
-                if (physicalUrl) {
-                    opn(physicalUrl);
-                }   
+                console.log(physicalLink);
+                // if (physicalUrl) {
+                //     // opn(physicalUrl);
+                // }   
             }
-
-            console.log(urlHref);
         }
+
+        return physicalLink;
     }
 
     getPlayerDataFromHtml() {

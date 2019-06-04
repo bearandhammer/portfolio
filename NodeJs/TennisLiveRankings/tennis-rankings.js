@@ -15,11 +15,13 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.get('/', async (req, res) => {
+app.get(['/', '/overview'], async (req, res) => {
     if (debug) {
         console.log('Request logged for a resource...');
     }
 
+    console.time();
+    
     // Quick helper class to manage the return of results/manipulation of data
     const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.atpLiveRankingSite),
         wtaDataCollectionHelper = new DataCollectionHelper(httpUtils.wtaLiveRankingSite);
@@ -29,6 +31,8 @@ app.get('/', async (req, res) => {
 
     await atpPromise;
     await wtaPromise;
+
+    console.timeEnd();
 
     if (debug) {
         // Confirm that the data types are of type 'string' (dummy)
@@ -41,12 +45,22 @@ app.get('/', async (req, res) => {
         wtaPlayerData: wtaDataCollectionHelper.getPlayerDataFromHtml()
     }
 
-    await atpDataCollectionHelper.getSpecificPlayerResults();
-    atpDataCollectionHelper.getPlayerLink();
-
     // EJS test run
     res.render('overview', { 
         playerData: playerData
+    });
+})
+.get('/profile', async (req, res) => {
+    const name = req.query.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(' ', '+');
+    //console.log(name);
+
+    const atpDataCollectionHelper = new DataCollectionHelper('');
+    await atpDataCollectionHelper.getSpecificPlayerResults(name);
+    const playerLink = atpDataCollectionHelper.getPlayerLink();
+    //console.log(playerLink);
+
+    res.render('profile', { 
+        playerLink: playerLink
     });
 });
 // Kick off our server!
