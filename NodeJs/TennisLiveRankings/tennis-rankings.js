@@ -41,6 +41,9 @@ app.get('/', async (req, res) => {
         wtaPlayerData: wtaDataCollectionHelper.getPlayerDataFromHtml()
     }
 
+    await atpDataCollectionHelper.getSpecificPlayerResults();
+    atpDataCollectionHelper.getPlayerLink();
+
     // EJS test run
     res.render('overview', { 
         playerData: playerData

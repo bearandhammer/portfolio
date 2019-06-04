@@ -1,8 +1,9 @@
 import { elementSelectors, httpUtils } from '../utility/base';
 
-// Axios (AJAX for returning live ranking HTML 'raw' data)  and Cheerio included to scrape HTML and provide manipulated content
+// Axios (AJAX for returning live ranking HTML 'raw' data) and Cheerio included to scrape HTML and provide manipulated content
 const axios = require('axios');
 const cheerio = require('cheerio');
+const opn = require('opn');
 
 export default class DataCollectionHelper {
     constructor(url, proxy = httpUtils.proxy) {
@@ -23,6 +24,38 @@ export default class DataCollectionHelper {
             this.liveRankingResultsHtml = res.data;
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    async getSpecificPlayerResults() {
+        try {
+            const res = await axios.get(`${this.proxy}https://www.google.com/search?safe=off&q=atp+tour+john+isner`, { 
+                crossdomain: true, 
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            this.specificPlayerResults = res.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    getPlayerLink() {
+        if (this.specificPlayerResults) {
+            const $ = cheerio.load(this.specificPlayerResults);
+            const urlHref = $("a[href*='https://www.atptour.com/en/players/'][href*='/overview']").attr('href');
+            
+            if (urlHref) {
+                const physicalUrl = urlHref.substring(urlHref.indexOf('https'), urlHref.indexOf('&sa='));
+
+                if (physicalUrl) {
+                    opn(physicalUrl);
+                }   
+            }
+
+            console.log(urlHref);
         }
     }
 
