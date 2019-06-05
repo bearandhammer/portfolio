@@ -29,7 +29,7 @@ export default class DataCollectionHelper {
 
     async getSpecificPlayerResults(name) {
         try {
-            const res = await axios.get(`${this.proxy}https://www.google.com/search?safe=off&q=atp+tour+${ name }`, { 
+            const res = await axios.get(`${this.proxy}${ this.url }${ name }`, { 
                 crossdomain: true, 
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -51,11 +51,6 @@ export default class DataCollectionHelper {
             
             if (urlHref) {
                 physicalLink = urlHref.substring(urlHref.indexOf('https'), urlHref.indexOf('&sa='));
-
-                console.log(physicalLink);
-                // if (physicalUrl) {
-                //     // opn(physicalUrl);
-                // }   
             }
         }
 
@@ -71,7 +66,7 @@ export default class DataCollectionHelper {
             const $ = cheerio.load(this.liveRankingResultsHtml);
             const elements = $(elementSelectors.atpTableId).children('tbody').find('tr');
 
-            let country;
+            let country;    
             elements.slice(0, 20).each((i, elem) => {
                 if (i % 2 === 0) {
                     country = $(elem).find('td').eq(5).text();
@@ -81,12 +76,16 @@ export default class DataCollectionHelper {
                         name: $(elem).find('td').eq(3).text(),
                         age: Math.floor(parseFloat($(elem).find('td').eq(4).text())),
                         country: country.substring(0, country.length - 1),
-                        points: parseInt($(elem).find('td').eq(6).text()),
+                        points: $(elem).find('td').eq(6).text(),
+                        currentTournament: $(elem).find('td').eq(9).text().replace('(', ' ').replace(')', ' ').trim(),
+                        previousTournament: $(elem).find('td').eq(10).text().replace('(', ' ').replace(')', ' ').trim(),
+                        nextPoints: $(elem).find('td').eq(12).text(),
+                        maxPoints: $(elem).find('td').eq(13).text()
                     });
                 }
             });   
         }
-
+        
         return playerDetailsTemp;
     }
 }
