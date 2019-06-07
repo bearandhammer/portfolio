@@ -1,0 +1,19 @@
+<%- include('partials/header', { title: 'Tennis Live Rankings' }); %>
+<body>
+    <div id="container">
+        <h1 class="text-center">TENNIS LIVE RANKINGS</h1>
+        <p class="text-center site-detail-text">
+            This site pulls WTA and ATP data from <a href="https://live-tennis.eu/en/wta-live-ranking" target="_blank">https://live-tennis.eu/en/wta-live-ranking</a>
+            and <a href="https://live-tennis.eu/en/atp-live-ranking" target="_blank">https://live-tennis.eu/en/atp-live-ranking</a> to show the current female and male
+            top 10 players, based on live ranking information. Select a player to see a more detailed profile.
+        </p>
+        <div id="table-container">
+            <h2>WTA Live Rankings</h2>
+            <%- include('partials/datatable', { playerData: playerData.wtaPlayerData }); %>
+            <h2>ATP Live Rankings</h2>
+            <%- include('partials/datatable', { playerData: playerData.atpPlayerData }); %>
+        </div>
+    </div>
+    <script src="/scripts/site-script.js"></script>
+</body>
+</html>

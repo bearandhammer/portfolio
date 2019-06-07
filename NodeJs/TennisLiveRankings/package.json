@@ -1,0 +1,26 @@
+{
+  "name": "tennisliverankings",
+  "version": "1.0.0",
+  "description": "NodeJS portfolio sample app",
+  "main": "tennis-rankings.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "ejs": "^2.6.1",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "node-cache": "^4.2.0",
+    "opn": "^6.0.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r esm tennis-rankings.js"
+  },
+  "author": "Lewis Grint",
+  "license": "ISC"
+}
