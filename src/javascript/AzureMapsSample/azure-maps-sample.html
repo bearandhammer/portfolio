@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>Azure Map Test</title>
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/css/atlas.min.css?api-version=1.0" type="text/css" />
+    <script src="https://atlas.microsoft.com/sdk/js/atlas.min.js?api-version=1.0"></script>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+ 
+        #mapContainer {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>    
+    <div id="mapContainer"></div>
+    <script>
+        // Encapsulation class that is a holding container for search parameters
+        class SearchOptions {
+            constructor(subscriptionKey, searchTerm, startLatitude, startLongitude, searchRadius ) {
+                this.subscriptionKey = subscriptionKey;
+                this.searchTerm = searchTerm;
+                this.startLatitude = startLatitude;
+                this.startLongitude = startLongitude;
+                this.searchRadius = searchRadius;
+            }
+            // Utility function for generating a search url based on the class properties
+            generateSearchUrl() {
+                return `https://atlas.microsoft.com/search/fuzzy/json?api-version=1.0&query=${ this.searchTerm }&subscription-key=${ this.subscriptionKey }&lat=${ this.startLatitude }&lon=${ this.startLongitude }&radius=${ this.searchRadius }`;
+            }
+        }
+ 
+        // Function for generating a map (using the mapContainer element reference provided and subscription key)
+        function getMap(mapContainer, subscriptionKey) {
+            return new atlas.Map(mapContainer, {
+                "subscription-key": subscriptionKey
+            });
+        }
+ 
+        // Function for preparing the pin layer on the targeted map using the provided layer name
+        function prepareMapPins(map, searchLayerName, pinType) {
+            map.addPins([], {
+                name: searchLayerName,
+                cluster: false,
+                icon: pinType
+            });
+        }
+ 
+        // Function that processes the data from 'fetch' and adds pins (POIs) the the map using the returned json data
+        function processMapData(data, searchLayerName, map, cameraPadding) {
+            if (data != null && data.results != null && data.results.length > 0) {
+                // Initialise a searchPins array and limit the returned json data to those that are marked as POIs
+                let searchPins = [],
+                    poiResults = data.results.filter((result) => { return result.type === "POI" }) || [];
+ 
+                // Extract features from the returned data and add it to the searchPins array (this contains location-based information)
+                searchPins = poiResults.map((poiResult) => {
+                    let poiPosition = [poiResult.position.lon, poiResult.position.lat];
+ 
+                    return new atlas.data.Feature(new atlas.data.Point(poiPosition), {
+                        name: poiResult.poi.name,
+                        address: poiResult.address.freeformAddress,
+                        position: poiResult.position.lat + ", " + poiResult.position.lon
+                    });
+                });
+ 
+                // Add POIs discovered to the appropriate search layer
+                map.addPins(searchPins, {
+                    name: searchLayerName
+                });
+ 
+                // Set the map camera to be fixed on the 'searchPins'
+                let lons = searchPins.map((pin) => pin.geometry.coordinates[0] ),
+                    lats = searchPins.map((pin) => pin.geometry.coordinates[1] ),
+                    swLon = Math.min.apply(null, lons),
+                    swLat = Math.min.apply(null, lats),
+                    neLon = Math.max.apply(null, lons),
+                    neLat = Math.max.apply(null, lats);
+ 
+                map.setCameraBounds({
+                    bounds: [swLon, swLat, neLon, neLat],
+                    padding: cameraPadding
+                });             
+            }
+        }
+ 
+        // Function that is triggered on 'mouseover' of a pin element to display extra information
+        function createMouseOverPopUps(e, popup, map) {
+            let popupContentElement = document.createElement("div");
+            popupContentElement.style.padding = "5px";
+ 
+            let popupNameElement = document.createElement("div");
+            popupNameElement.innerText = e.features[0].properties.name;
+            popupContentElement.appendChild(popupNameElement);
+ 
+            let popupAddressElement = document.createElement("div");
+            popupAddressElement.innerText = e.features[0].properties.address;
+            popupContentElement.appendChild(popupAddressElement);
+ 
+            let popupPositionElement = document.createElement("div");
+            popupPositionElement.innerText = e.features[0].properties.name;
+            popupContentElement.appendChild(popupPositionElement);
+ 
+            popup.setPopupOptions({
+                position: e.features[0].geometry.coordinates,
+                content: popupContentElement
+            });
+ 
+            popup.open(map);
+        }
+ 
+        // Function to actually create the map
+        function createMap() {
+            // Alter the query parameters here for testing, add a subscription key, search term (e.g. 'hairdressers' or 'pubs'), 
+            // the latitude/longitude to begin the search from and the radius to search (in metres)
+            const subscriptionKey = "INSERT_SUBSCRIPTION_KEY_HERE",
+                  searchTerm = 'pubs',
+                  startLatitude = '52.630181',
+                  startLongitude = '1.297415',
+                  searchRadius = 1000,
+                  // The 'search layer' that will contain the discovered 'pins' and will tie to mouse over pop-ups
+                  searchLayerName = "search-results",
+                  // Use this to switch out the pin type on render (https://docs.microsoft.com/en-us/javascript/api/azure-maps-javascript/pinproperties?view=azure-iot-typescript-latest)
+                  pinType = "pin-red",
+                  // Had issues when searching a small radius and having this value too high (overlapping pins???) - but adjust as necessary
+                  cameraPadding = 1;
+ 
+            // Encapsulate the search constants into a utility class which containts a function for calculating a 
+            // search url. Also, generate a map/popup object pre-search to get us started
+            let options = new SearchOptions(subscriptionKey, searchTerm, startLatitude, startLongitude, searchRadius),
+                popup = new atlas.Popup();
+                map = getMap('mapContainer', subscriptionKey);
+ 
+            // Initialise the pin layer for the targeted map
+            prepareMapPins(map, searchLayerName, pinType);
+ 
+            // Use fetch to call the generated search URL and process the response to add data points (POIs in this case) to the map
+            fetch(options.generateSearchUrl())
+                .then(response => response.json())
+                .then(data => processMapData(data, searchLayerName, map, cameraPadding));
+ 
+            // Add a popup to the map which will display some basic information about a search result on hover over a pin
+            map.addEventListener("mouseover", searchLayerName, (e) => {
+                createMouseOverPopUps(e, popup, map);
+            });
+        }
+ 
+        // Create the sample map!
+        createMap();
+    </script>
+</body>
+</html>
