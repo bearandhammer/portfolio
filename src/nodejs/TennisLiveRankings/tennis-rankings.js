@@ -47,26 +47,26 @@ async function getPlayerDataFromCache() {
 
 async function getProfileDataFromCache(req) {
     // Well this isn't quite as intended - need to use the player name as the key for this to work!!!
-    let playerLink = appCache.get('playerProfile');;
+    // let playerLink = appCache.get('playerProfile');;
 
-    if (!playerLink) {
-        const name = req.query.name
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(' ', '+');
- 
-        const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.googlePlayerSearch);
-        await atpDataCollectionHelper.getSpecificPlayerResults(name);
+    // if (!playerLink) {
+    const name = req.query.name
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(' ', '+');
 
-        playerLink = atpDataCollectionHelper.getPlayerLink();
+    const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.googlePlayerSearch);
+    await atpDataCollectionHelper.getSpecificPlayerResults(name);
 
-        console.log('Caching player profile data.');
-        appCache.set('playerProfile', playerLink);  
-    }
-    else {
-        console.log('Using cached profile data.');
-    }
+    const playerLink = atpDataCollectionHelper.getPlayerLink();
+
+    //     console.log('Caching player profile data.');
+    //     appCache.set('playerProfile', playerLink);  
+    // }
+    // else {
+    //     console.log('Using cached profile data.');
+    // }
 
     return playerLink;
 }
