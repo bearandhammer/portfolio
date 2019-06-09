@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EpicQuest.GameExtensions.Extensions">
+    <Position X="29.5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameExtensions\Extensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Manager.GameManager">
+    <Position X="26.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABCAAAAAAAAAQIAAAAAAIAQAAACgAAAAGBI=</HashCode>
+      <FileName>Manager\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Armour" BaseTypeListCollapsed="true">
+    <Position X="21" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAgAIAAIFGAQAAAAQIAAAgAAAEgAEGQAQ=</HashCode>
+      <FileName>Models\Armour\Armour.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EpicQuest.Models.GameCharacter">
+    <Position X="7.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CharacterBase\GameCharacter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EpicQuest.Models.Hero">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCAAgQAAgBoAAAAABAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\CharacterBase\Hero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Monster">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CharacterBase\Monster.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EpicQuest.Models.Die">
+    <Position X="11" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dice\Die.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Brawler">
+    <Position X="2" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Heroes\Brawler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Cleric">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Heroes\Cleric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Mage">
+    <Position X="5.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Heroes\Mage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Necromancer">
+    <Position X="7.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Heroes\Necromancer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Thief">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Heroes\Thief.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Kobold">
+    <Position X="12.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Monsters\Kobold.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EpicQuest.Models.Skeleton">
+    <Position X="10.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Monsters\Skeleton.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EpicQuest.Models.Merchant">
+    <Position X="5" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\NPC\Merchant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Weapon" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="6.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAQECAAA=</HashCode>
+      <FileName>Models\Weapons\Weapon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EpicQuest.Models.Dice.BlueDie">
+    <Position X="8.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Dice\BlueDie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Dice.GreenDie">
+    <Position X="11" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Dice\GreenDie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Dice.RedDie">
+    <Position X="13.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\Dice\RedDie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Dungeon.EpicDungeon">
+    <Position X="16.5" Y="12.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAFAAAAIAAAAAAAIAAAACABAAAAAAAAA=</HashCode>
+      <FileName>Models\Dungeon\EpicDungeon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Models.Dungeon.Room" BaseTypeListCollapsed="true">
+    <Position X="19.75" Y="12.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAACAAAABAAAAAABAAAAABAAAAEAAAABQAAgAA=</HashCode>
+      <FileName>Models\Dungeon\Room.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EpicQuest.Models.Items.TreasureItem" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Models\Items\TreasureItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EpicQuest.Program">
+    <Position X="24.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EpicQuest.Utility.Utils">
+    <Position X="29.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAEAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="EpicQuest.Interfaces.ICombatant">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICombatant.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EpicQuest.Interfaces.IHeroArmour">
+    <Position X="24" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Interfaces\IHeroArmour.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EpicQuest.Interfaces.IHeroWeapon">
+    <Position X="26.25" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Interfaces\IHeroWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EpicQuest.Interfaces.IRollsDice">
+    <Position X="24" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Interfaces\IRollsDice.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EpicQuest.Interfaces.IRoomContent">
+    <Position X="14.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IRoomContent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EpicQuest.Interfaces.ISupportsMappingBuilds">
+    <Position X="23" Y="3.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ISupportsMappingBuilds.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EpicQuest.Interfaces.ITreasure">
+    <Position X="23" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Interfaces\ITreasure.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EpicQuest.Interfaces.IUniqueItem">
+    <Position X="22.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IUniqueItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="EpicQuest.GameEnums.DebugMsgType">
+    <Position X="29.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameEnums\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EpicQuest.GameEnums.GameAction">
+    <Position X="34.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAMAAAEAEAAAAAAAAAAAAABAAEAAAACAAAAAA=</HashCode>
+      <FileName>GameEnums\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EpicQuest.GameEnums.HeroClass">
+    <Position X="31.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAADIAAQABAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>GameEnums\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EpicQuest.GameEnums.HeroOffensiveItemType">
+    <Position X="39" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AgAgAAAgACAAAAAAgBAQgAAAAAAAIAAAAAIAAABAAAI=</HashCode>
+      <FileName>GameEnums\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EpicQuest.GameEnums.HeroDefensiveItemType">
+    <Position X="41.5" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAAQAACAQFACCSEgAMBAAAkAAQAQAA2oAIAAAAEAAAU=</HashCode>
+      <FileName>GameEnums\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EpicQuest.GameEnums.HeroDefensiveItemSlotType">
+    <Position X="36.5" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAQAAAAQIAAEAAAAAAAAAAAAAAAQAAAAAEAAQA=</HashCode>
+      <FileName>GameEnums\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EpicQuest.GameEnums.DieFace">
+    <Position X="33" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AECAAAAAAAAAAAAAAAAAAAAAQAAAAACAAAACAAAAAAA=</HashCode>
+      <FileName>GameEnums\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

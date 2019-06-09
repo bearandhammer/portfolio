@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpicQuest", "EpicQuest\EpicQuest.csproj", "{55B57FAF-76EF-4591-9148-2182D1E7ED69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpicQuest.Tests", "EpicQuest.Tests\EpicQuest.Tests.csproj", "{CB04660D-203C-4655-9198-6FCF51E5326E}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "EpicQuest.Setup", "EpicQuest.Setup\EpicQuest.Setup.wixproj", "{F2CCB16A-6D5D-4E40-860F-F64F1B109E3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Debug|x86.Build.0 = Debug|Any CPU
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Release|x86.ActiveCfg = Release|Any CPU
+		{55B57FAF-76EF-4591-9148-2182D1E7ED69}.Release|x86.Build.0 = Release|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Debug|x86.Build.0 = Debug|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Release|x86.ActiveCfg = Release|Any CPU
+		{CB04660D-203C-4655-9198-6FCF51E5326E}.Release|x86.Build.0 = Release|Any CPU
+		{F2CCB16A-6D5D-4E40-860F-F64F1B109E3F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F2CCB16A-6D5D-4E40-860F-F64F1B109E3F}.Debug|x86.ActiveCfg = Debug|x86
+		{F2CCB16A-6D5D-4E40-860F-F64F1B109E3F}.Debug|x86.Build.0 = Debug|x86
+		{F2CCB16A-6D5D-4E40-860F-F64F1B109E3F}.Release|Any CPU.ActiveCfg = Release|x86
+		{F2CCB16A-6D5D-4E40-860F-F64F1B109E3F}.Release|x86.ActiveCfg = Release|x86
+		{F2CCB16A-6D5D-4E40-860F-F64F1B109E3F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://lgrint1.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EpicQuest\\EpicQuest.csproj
+		SccProjectName1 = EpicQuest
+		SccLocalPath1 = EpicQuest
+		SccProjectUniqueName2 = EpicQuest.Tests\\EpicQuest.Tests.csproj
+		SccProjectName2 = EpicQuest.Tests
+		SccLocalPath2 = EpicQuest.Tests
+		SccProjectUniqueName3 = EpicQuest.Setup\\EpicQuest.Setup.wixproj
+		SccProjectName3 = EpicQuest.Setup
+		SccLocalPath3 = EpicQuest.Setup
+	EndGlobalSection
+EndGlobal

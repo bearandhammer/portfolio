@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{55B57FAF-76EF-4591-9148-2182D1E7ED69}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EpicQuest</RootNamespace>
+    <AssemblyName>EpicQuest</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GameEnums\Enums.cs" />
+    <Compile Include="GameExtensions\Extensions.cs" />
+    <Compile Include="Interfaces\ICalculateDiceState.cs" />
+    <Compile Include="Interfaces\ICombatant.cs" />
+    <Compile Include="Interfaces\IHasEquipment.cs" />
+    <Compile Include="Interfaces\IHeroArmour.cs" />
+    <Compile Include="Interfaces\IRollsDice.cs" />
+    <Compile Include="Interfaces\IRoomContent.cs" />
+    <Compile Include="Interfaces\ISupportsArmour.cs" />
+    <Compile Include="Interfaces\ISupportsMappingBuilds.cs" />
+    <Compile Include="Interfaces\ISupportsSetup.cs" />
+    <Compile Include="Interfaces\ISupportsWeapon.cs" />
+    <Compile Include="Interfaces\ITreasure.cs" />
+    <Compile Include="Interfaces\IUniqueItem.cs" />
+    <Compile Include="Interfaces\IHeroWeapon.cs" />
+    <Compile Include="Manager\GameManager.cs" />
+    <Compile Include="Models\CharacterBase\CombatCharacter.cs" />
+    <Compile Include="Models\Dice\BlueDie.cs" />
+    <Compile Include="Models\Dice\GreenDie.cs" />
+    <Compile Include="Models\Dice\GreyDie.cs" />
+    <Compile Include="Models\Dice\RedDie.cs" />
+    <Compile Include="Models\Dungeon\EpicDungeon.cs" />
+    <Compile Include="Models\Dungeon\Room.cs" />
+    <Compile Include="Models\Armour\Armour.cs" />
+    <Compile Include="Models\Heroes\Brawler.cs" />
+    <Compile Include="Models\Heroes\Cleric.cs" />
+    <Compile Include="Models\Dice\Die.cs" />
+    <Compile Include="Models\CharacterBase\GameCharacter.cs" />
+    <Compile Include="Models\CharacterBase\Hero.cs" />
+    <Compile Include="Models\Items\TreasureItem.cs" />
+    <Compile Include="Models\Monsters\Kobold.cs" />
+    <Compile Include="Models\Heroes\Mage.cs" />
+    <Compile Include="Models\Monsters\Vampire.cs" />
+    <Compile Include="Models\NPC\Merchant.cs" />
+    <Compile Include="Models\CharacterBase\Monster.cs" />
+    <Compile Include="Models\Heroes\Necromancer.cs" />
+    <Compile Include="Models\Monsters\Skeleton.cs" />
+    <Compile Include="Models\Heroes\Thief.cs" />
+    <Compile Include="Models\Weapons\Weapon.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\StaticGameActions.cs" />
+    <Compile Include="Utility\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="EpicDungeonClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
