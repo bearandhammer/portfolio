@@ -1,6 +1,7 @@
 // Excellent tutorial for using import/export (ES6 gubbins) here! https://timonweb.com/tutorials/how-to-enable-ecmascript-6-imports-in-nodejs/
 import DataCollectionHelper from "./models/DataCollectionHelper";
-import { httpUtils } from "./utility/base";
+import DataCleanser from './models/DataCleanser';
+import { httpUtils, cacheUtils, routes, views } from "./utility/base";
 
 // Use 'express' for our stock server (handles routing, etc.), along with some extra utilities for serving favicons and general path generation
 const express = require('express');
@@ -11,12 +12,13 @@ const NodeCache = require( "node-cache" );
 // Declare the variable that underpins our Node.js server
 const app = express();
 const appCache = new NodeCache({ 
-    stdTTL: 120, checkperiod: 140 
+    stdTTL: cacheUtils.stockTtl, 
+    checkperiod: cacheUtils.stockCheckPeriod 
 });
 
 // General utility functions acting as a gateway to our DataCollectionHelper utility and underlying cache mechanisms
-async function getPlayerDataFromCache() {
-    let playerData = appCache.get('playerData');
+async function getPartialPlayerData() {
+    let playerData = appCache.get(cacheUtils.keys.playerData);
 
     if (!playerData) {
         // Quick helper class to manage the return of results/manipulation of data
@@ -34,56 +36,56 @@ async function getPlayerDataFromCache() {
             wtaPlayerData: wtaDataCollectionHelper.getPlayerDataFromHtml()
         }
 
-        console.log('Caching player data data.');
-        appCache.set('playerData', playerData);   
+        appCache.set(cacheUtils.keys.playerData, playerData);   
     }
-    else {
-        console.log('Using cached player data.');
-    }
-
 
     return playerData;
 }
 
-async function getProfileDataFromCache(req) {
-    // Well this isn't quite as intended - need to use the player name as the key for this to work!!!
-    // let playerLink = appCache.get('playerProfile');;
+async function getFullProfileData(req) {
+    const cleanser = new DataCleanser();
+    const name = cleanser.cleanPlayerName(req.query.name);
+    const cacheKey = `${cacheUtils.keys.profileData}${ name }`;
 
-    // if (!playerLink) {
-    const name = req.query.name
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(' ', '+');
+    let playerLink = appCache.get(cacheKey);;
 
-    const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.googlePlayerSearch);
-    await atpDataCollectionHelper.getSpecificPlayerResults(name);
+    if (!playerLink) {
+        const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.googlePlayerSearch);
+        await atpDataCollectionHelper.getSpecificPlayerResults(name);
 
-    const playerLink = atpDataCollectionHelper.getPlayerLink();
+        playerLink = atpDataCollectionHelper.getPlayerLink(req.query.type);
 
-    //     console.log('Caching player profile data.');
-    //     appCache.set('playerProfile', playerLink);  
-    // }
-    // else {
-    //     console.log('Using cached profile data.');
-    // }
+        appCache.set(cacheKey, playerLink);  
+    }
 
-    return playerLink;
+    const allPlayers = await getPartialPlayerData();
+    
+    const discoveredPlayer = req.query.type === 'atp' 
+        ? allPlayers.atpPlayerData.find(player => cleanser.cleanPlayerName(player.name) === name)
+        : req.query.type === 'wta' 
+        ? allPlayers.wtaPlayerData.find(player => cleanser.cleanPlayerName(player.name) === name)
+        : null;
+
+    if (discoveredPlayer) {
+        discoveredPlayer.playerLink = playerLink;
+    }  
+    
+    return discoveredPlayer;
 }
 
 // Server setup - configured the EJS view engine, static resources (from the 'public' folder) as well as the defined routes
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.get(['/', '/overview'], async (req, res) => {    
-    res.render('overview', { 
-        playerData: await getPlayerDataFromCache()
+app.get([routes.root, routes.overview], async (req, res) => {    
+    res.render(views.overview, { 
+        playerData: await getPartialPlayerData()
     });
 })
-.get('/profile', async (req, res) => {
-    res.render('profile', { 
-        playerLink: await getProfileDataFromCache(req)
+.get(routes.profile, async (req, res) => {
+    res.render(views.profile, { 
+        fullPlayerData: await getFullProfileData(req)
     });
 });
 // Kick off our server!
-app.listen(httpUtils.port, '127.0.0.1', () => console.log(`Server started. Listening on 127.0.0.1 on port ${httpUtils.port}...`));
+app.listen(httpUtils.port, httpUtils.host, () => console.log(`Server started. Listening on ${ httpUtils.host } on port ${httpUtils.port}...`));
