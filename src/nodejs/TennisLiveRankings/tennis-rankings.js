@@ -16,7 +16,9 @@ const appCache = new NodeCache({
 
 // General utility functions acting as a gateway to our DataCollectionHelper utility and underlying cache mechanisms
 async function getPlayerDataFromCache() {
-    let playerData = appCache.get('playerData');
+    const cacheKey = 'playerData';
+
+    let playerData = appCache.get(cacheKey);
 
     if (!playerData) {
         // Quick helper class to manage the return of results/manipulation of data
@@ -34,39 +36,39 @@ async function getPlayerDataFromCache() {
             wtaPlayerData: wtaDataCollectionHelper.getPlayerDataFromHtml()
         }
 
-        console.log('Caching player data data.');
-        appCache.set('playerData', playerData);   
+        console.log('Caching player data.');
+        appCache.set(cacheKey, playerData);   
     }
     else {
         console.log('Using cached player data.');
     }
 
-
     return playerData;
 }
 
 async function getProfileDataFromCache(req) {
-    // Well this isn't quite as intended - need to use the player name as the key for this to work!!!
-    // let playerLink = appCache.get('playerProfile');;
-
-    // if (!playerLink) {
     const name = req.query.name
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, "")
         .replace(' ', '+');
 
-    const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.googlePlayerSearch);
-    await atpDataCollectionHelper.getSpecificPlayerResults(name);
+    const cacheKey = `playerProfile_${ name }`;
 
-    const playerLink = atpDataCollectionHelper.getPlayerLink();
+    let playerLink = appCache.get(cacheKey);;
 
-    //     console.log('Caching player profile data.');
-    //     appCache.set('playerProfile', playerLink);  
-    // }
-    // else {
-    //     console.log('Using cached profile data.');
-    // }
+    if (!playerLink) {
+        const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.googlePlayerSearch);
+        await atpDataCollectionHelper.getSpecificPlayerResults(name);
+
+        playerLink = atpDataCollectionHelper.getPlayerLink();
+
+        console.log('Caching player profile data.');
+        appCache.set(cacheKey, playerLink);  
+    }
+    else {
+        console.log('Using cached profile data.');
+    }
 
     return playerLink;
 }
