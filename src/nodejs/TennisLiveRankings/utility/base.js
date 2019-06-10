@@ -12,8 +12,8 @@ export const httpUtils = {
 }
 
 export const cacheUtils = {
-    stockTtl: 300,
-    stockCheckPeriod: 330,
+    stockTtl: 900,
+    stockCheckPeriod: 960,
     keys: {
         playerData: 'playerData',
         profileData: 'profileData_'

@@ -10,7 +10,7 @@
                     <th>Points</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-type='<%= type %>'>
                 <% playerData.forEach(player => { %>
                 <tr class="player-row">
                     <td><%= player.rank %></td>

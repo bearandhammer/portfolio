@@ -8,10 +8,71 @@
                 BACK
             </a>
         </div>
-        <p class="text-center site-detail-text">
-            This is where the players profile will go!
-            <a href="<%= playerLink %>" target="_blank">Profile Link</a>
-        </p>
+        <div class="container text-center">
+            <hr />
+            <div class='row text-center' style="margin-bottom: 20px;">
+                <div class="col-md-4 text-center">
+                    <p><strong>RANK</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.rank %>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>NAME</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.name %>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>AGE</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.age %>
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <div class='row' style="margin-bottom: 20px;">
+                <div class="col-md-4">
+                    <p><strong>POINTS</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.points %>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>CURRENT TOURNAMENT</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.currentTournament %>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>PREVIOUS TOURNAMENT</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.previousTournament %>
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <div class='row' style="margin-bottom: 20px;">
+                <div class="col-md-4">
+                    <p><strong>NEXT POINTS</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.nextPoints %>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>MAX POINTS</strong></p>
+                    <p class="text-center site-detail-text">
+                        <%= fullPlayerData.maxPoints %>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>PROFILE LINK</strong></p>
+                    <p class="text-center site-detail-text">          
+                        <a href="<%= fullPlayerData.playerLink %>" target="_blank">GO TO PLAYER PROFILE</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

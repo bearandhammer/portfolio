@@ -1,5 +1,6 @@
 // Excellent tutorial for using import/export (ES6 gubbins) here! https://timonweb.com/tutorials/how-to-enable-ecmascript-6-imports-in-nodejs/
 import DataCollectionHelper from "./models/DataCollectionHelper";
+import DataCleanser from './models/DataCleanser';
 import { httpUtils, cacheUtils, routes, views } from "./utility/base";
 
 // Use 'express' for our stock server (handles routing, etc.), along with some extra utilities for serving favicons and general path generation
@@ -16,7 +17,7 @@ const appCache = new NodeCache({
 });
 
 // General utility functions acting as a gateway to our DataCollectionHelper utility and underlying cache mechanisms
-async function getPlayerDataFromCache() {
+async function getPartialPlayerData() {
     let playerData = appCache.get(cacheUtils.keys.playerData);
 
     if (!playerData) {
@@ -41,13 +42,9 @@ async function getPlayerDataFromCache() {
     return playerData;
 }
 
-async function getProfileDataFromCache(req) {
-    const name = req.query.name
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(' ', '+');
-
+async function getFullProfileData(req) {
+    const cleanser = new DataCleanser();
+    const name = cleanser.cleanPlayerName(req.query.name);
     const cacheKey = `${cacheUtils.keys.profileData}${ name }`;
 
     let playerLink = appCache.get(cacheKey);;
@@ -56,12 +53,24 @@ async function getProfileDataFromCache(req) {
         const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.googlePlayerSearch);
         await atpDataCollectionHelper.getSpecificPlayerResults(name);
 
-        playerLink = atpDataCollectionHelper.getPlayerLink();
+        playerLink = atpDataCollectionHelper.getPlayerLink(req.query.type);
 
         appCache.set(cacheKey, playerLink);  
     }
+
+    const allPlayers = await getPartialPlayerData();
     
-    return playerLink;
+    const discoveredPlayer = req.query.type === 'atp' 
+        ? allPlayers.atpPlayerData.find(player => cleanser.cleanPlayerName(player.name) === name)
+        : req.query.type === 'wta' 
+        ? allPlayers.wtaPlayerData.find(player => cleanser.cleanPlayerName(player.name) === name)
+        : null;
+
+    if (discoveredPlayer) {
+        discoveredPlayer.playerLink = playerLink;
+    }  
+    
+    return discoveredPlayer;
 }
 
 // Server setup - configured the EJS view engine, static resources (from the 'public' folder) as well as the defined routes
@@ -70,12 +79,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.get([routes.root, routes.overview], async (req, res) => {    
     res.render(views.overview, { 
-        playerData: await getPlayerDataFromCache()
+        playerData: await getPartialPlayerData()
     });
 })
 .get(routes.profile, async (req, res) => {
     res.render(views.profile, { 
-        playerLink: await getProfileDataFromCache(req)
+        fullPlayerData: await getFullProfileData(req)
     });
 });
 // Kick off our server!

@@ -1,5 +1,27 @@
 /* TODO - full minification */
-body { background-color: rgb(98, 103, 104); font-family: 'Orbitron', sans-serif; }
-h1, h2, p { color: white; }
-a, a:hover, a:focus { text-decoration: none; background-color: transparent; }
-#container { margin: 10px; } .site-detail-text { margin: 20px 0; }
+body { 
+    background-color: rgb(98, 103, 104); 
+    font-family: 
+    'Orbitron', sans-serif; 
+}
+
+h1, h2, p { 
+    color: white; 
+}
+
+a, a:hover, a:focus { 
+    text-decoration: none; 
+    background-color: transparent; 
+}
+
+#container { 
+    margin: 10px; 
+} 
+
+.site-detail-text { 
+    margin: 20px 0; 
+}
+
+tbody:hover {
+    cursor: pointer;
+}

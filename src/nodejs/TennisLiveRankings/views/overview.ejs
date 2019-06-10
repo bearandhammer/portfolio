@@ -9,9 +9,9 @@
         </p>
         <div id="table-container">
             <h2>WTA Live Rankings</h2>
-            <%- include('partials/datatable', { playerData: playerData.wtaPlayerData }); %>
+            <%- include('partials/datatable', { playerData: playerData.wtaPlayerData, type: 'wta' }); %>
             <h2>ATP Live Rankings</h2>
-            <%- include('partials/datatable', { playerData: playerData.atpPlayerData }); %>
+            <%- include('partials/datatable', { playerData: playerData.atpPlayerData, type: 'atp' }); %>
         </div>
     </div>
     <script src="/scripts/site-script.js"></script>

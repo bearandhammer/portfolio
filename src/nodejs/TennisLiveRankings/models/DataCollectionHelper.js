@@ -29,7 +29,9 @@ export default class DataCollectionHelper {
 
     async getSpecificPlayerResults(name) {
         try {
-            const res = await axios.get(`${this.proxy}${ this.url }${ name }`, { 
+            const searchName = name.replace(' ', '+');
+
+            const res = await axios.get(`${this.proxy}${ this.url }${ searchName }`, { 
                 crossdomain: true, 
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -42,12 +44,16 @@ export default class DataCollectionHelper {
         }
     }
 
-    getPlayerLink() {
+    getPlayerLink(type) {
         let physicalLink = '';
 
         if (this.specificPlayerResults) {
             const $ = cheerio.load(this.specificPlayerResults);
-            const urlHref = $("a[href*='https://www.atptour.com/en/players/'][href*='/overview']").attr('href');
+            const urlHref = type === 'atp' 
+                ? $("a[href*='https://www.atptour.com/en/players/'][href*='/overview']").attr('href')
+                : type === 'wta' 
+                ? $("a[href*='https://www.wtatennis.com/players/player/'][href*='/title']").attr('href')
+                : null;
             
             if (urlHref) {
                 physicalLink = urlHref.substring(urlHref.indexOf('https'), urlHref.indexOf('&sa='));
