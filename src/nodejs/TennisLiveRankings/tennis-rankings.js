@@ -21,16 +21,18 @@ async function getPartialPlayerData() {
     let playerData = appCache.get(cacheUtils.keys.playerData);
 
     if (!playerData) {
-        // Quick helper class to manage the return of results/manipulation of data
+        // Create instances of helper types to manage the return of results/manipulation of data
         const atpDataCollectionHelper = new DataCollectionHelper(httpUtils.atpLiveRankingSite),
             wtaDataCollectionHelper = new DataCollectionHelper(httpUtils.wtaLiveRankingSite);
 
+        // Generate two promises here and then await them separately (to get a performance buff)
         const atpPromise = atpDataCollectionHelper.getResults(),
             wtaPromise = wtaDataCollectionHelper.getResults();
 
         await atpPromise;
         await wtaPromise;
 
+        // Setup player data (ATP/WTA) and cache the results (as this is fairly expensive to obtain)
         playerData = {
             atpPlayerData: atpDataCollectionHelper.getPlayerDataFromHtml(),
             wtaPlayerData: wtaDataCollectionHelper.getPlayerDataFromHtml()
@@ -47,6 +49,7 @@ async function getFullProfileData(req) {
     const name = cleanser.cleanPlayerName(req.query.name);
     const cacheKey = `${cacheUtils.keys.profileData}${ name }`;
 
+    // Player WTA/ATP profiles are obtained via scraping a Google search results page, so obtain this separately 
     let playerLink = appCache.get(cacheKey);;
 
     if (!playerLink) {
@@ -55,9 +58,11 @@ async function getFullProfileData(req) {
 
         playerLink = atpDataCollectionHelper.getPlayerLink(req.query.type);
 
+        // Cache the link obtained, again as their is a hit in retrieving this each time
         appCache.set(cacheKey, playerLink);  
     }
 
+    // Performance rethink needed here (although caching helps) - obtain the partial player data again and append the link (gives us full player data!)
     const allPlayers = await getPartialPlayerData();
     
     const discoveredPlayer = req.query.type === 'atp' 
@@ -66,6 +71,7 @@ async function getFullProfileData(req) {
         ? allPlayers.wtaPlayerData.find(player => cleanser.cleanPlayerName(player.name) === name)
         : null;
 
+    // TBC - error handling
     if (discoveredPlayer) {
         discoveredPlayer.playerLink = playerLink;
     }  

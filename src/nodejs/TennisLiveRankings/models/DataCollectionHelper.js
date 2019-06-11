@@ -27,11 +27,12 @@ export default class DataCollectionHelper {
         }
     }
 
+    // Get Google search results (HTML) for a specific tour player (either WTA or ATP)
     async getSpecificPlayerResults(name) {
         try {
             const searchName = name.replace(' ', '+');
 
-            const res = await axios.get(`${this.proxy}${ this.url }${ searchName }`, { 
+            const res = await axios.get(`${ this.proxy }${ this.url }${ searchName }`, { 
                 crossdomain: true, 
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -44,6 +45,7 @@ export default class DataCollectionHelper {
         }
     }
 
+    // Using the HTML in scope, attempt to discover the WTA/ATP anchor tag href (this is the players profile link)
     getPlayerLink(type) {
         let physicalLink = '';
 
@@ -55,6 +57,7 @@ export default class DataCollectionHelper {
                 ? $("a[href*='https://www.wtatennis.com/players/player/'][href*='/title']").attr('href')
                 : null;
             
+            // Is somewhat messy so would like to reconsider (as WTA links don't follow the format, but it happens to function fine)
             if (urlHref) {
                 physicalLink = urlHref.substring(urlHref.indexOf('https'), urlHref.indexOf('&sa='));
             }
@@ -63,6 +66,7 @@ export default class DataCollectionHelper {
         return physicalLink;
     }
 
+    // Generate an array of WTA/ATP tour players from the relevant live ranking site HTML (using CheerioJS)
     getPlayerDataFromHtml() {
         // Temp code only - attempt to scrape the HTML using fairly fast/loose index based grabs on td text
         const playerDetailsTemp = [];

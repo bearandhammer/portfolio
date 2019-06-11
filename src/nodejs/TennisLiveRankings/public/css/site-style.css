@@ -5,8 +5,12 @@ body {
     'Orbitron', sans-serif; 
 }
 
-h1, h2, p { 
+h1, h2, h6, p { 
     color: white; 
+}
+
+h6 {
+    font-weight: bold;
 }
 
 a, a:hover, a:focus { 
@@ -14,12 +18,24 @@ a, a:hover, a:focus {
     background-color: transparent; 
 }
 
+.btn {
+    border: 1px solid white;
+    color: white;
+}
+    .btn:hover {
+        color: darkslategray;
+    }
+
 #container { 
     margin: 10px; 
 } 
 
 .site-detail-text { 
     margin: 20px 0; 
+}
+
+.profile-row {
+    margin-bottom: 20px;
 }
 
 tbody:hover {
