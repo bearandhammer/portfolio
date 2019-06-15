@@ -20,7 +20,10 @@ namespace WtaTennisPlayers.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            // Add OData and Memory Cache services
             services.AddOData();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +42,7 @@ namespace WtaTennisPlayers.Api
             app.UseHttpsRedirection();
             app.UseMvc(routeBuilder =>
             {
+                // Additional step required for OData to work - enable DI and setup the OData functionality that clients can call (Select, Count, etc.)
                 routeBuilder.EnableDependencyInjection();
                 routeBuilder.Expand().Select().Count().OrderBy().Filter();
             });
