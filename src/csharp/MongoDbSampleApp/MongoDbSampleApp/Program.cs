@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,24 @@ namespace MongoDbSampleApp
     {
         private static void Main(string[] args)
         {
-            WebPage samplePage = GetSamplePage();
+            //WebPage samplePage = GetSamplePage();
 
             MongoConnector connector = new MongoConnector("PagesDb");
-            connector.InsertRecord("Pages", samplePage);
+            //connector.InsertRecord("Pages", samplePage);
+
+            List<WebPage> pages = connector.LoadRecords<WebPage>("Pages");
+
+            pages?.ForEach(page =>
+            {
+                Console.WriteLine($"Id: { page.Id } - { page.Header }");
+            });
+
+            List<WebPage> pagesAgain = connector.LoadRecords<WebPage>("Pages");
+
+            pagesAgain?.ForEach(page =>
+            {
+                Console.WriteLine($"Id: { page.Id } - { page.Header }");
+            });
 
             Console.ReadLine();
         }
@@ -55,6 +70,7 @@ namespace MongoDbSampleApp
     {
         [BsonId]
         public Guid Id { get; set; }
+
         public string Header { get; set; }
         public string MainImageUrl { get; set; }
         public List<string> Paragraphs { get; set; }
@@ -75,6 +91,39 @@ namespace MongoDbSampleApp
         {
             IMongoCollection<T> collection = database.GetCollection<T>(table);
             collection.InsertOne(record);
+        }
+
+        public List<T> LoadRecords<T>(string table)
+        {
+            IMongoCollection<T> collection = database.GetCollection<T>(table);
+
+            return collection.Find(new BsonDocument()).ToList();
+        }
+
+        public T LoadRecordById<T>(string table, Guid id)
+        {
+            IMongoCollection<T> collection = database.GetCollection<T>(table);
+            FilterDefinition<T> filter = Builders<T>.Filter.Eq("Id", id);
+
+            return collection.Find(filter).First();
+        }
+
+        public void UpsertRecords<T>(string table, Guid id, T record)
+        {
+            IMongoCollection<T> collection = database.GetCollection<T>(table);
+
+            ReplaceOneResult result = collection.ReplaceOne(
+                new BsonDocument("_id", id),
+                record,
+                new UpdateOptions { IsUpsert = true });
+        }
+
+        public void DeleteRecord<T>(string table, Guid id)
+        {
+            IMongoCollection<T> collection = database.GetCollection<T>(table);
+            FilterDefinition<T> filter = Builders<T>.Filter.Eq("Id", id);
+
+            DeleteResult result = collection.DeleteOne(filter);
         }
     }
 }
