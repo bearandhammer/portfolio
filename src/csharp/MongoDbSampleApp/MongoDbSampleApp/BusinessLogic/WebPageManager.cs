@@ -36,7 +36,7 @@ namespace MongoDbSampleApp.BusinessLogic
                         break;
 
                     case "-u":
-                        UpsertWebPageDocumentById();
+                        UpdateWebPageDocumentById();
                         break;
 
                     case "-d":
@@ -62,9 +62,35 @@ namespace MongoDbSampleApp.BusinessLogic
             }
         }
 
-        private void UpsertWebPageDocumentById()
+        private void UpdateWebPageDocumentById()
         {
-            // TODO
+            Console.Write("Guid (ID): ");
+            Guid id = new Guid(Console.ReadLine().Trim());
+
+            WebPage page = connector.LoadRecordById<WebPage>("Pages", id);
+
+            if (page != null)
+            {
+                // Just allowing Header/Main Image URL updates, for now
+                Console.Write($"Header: ({ page.Header })");
+                string header = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(header))
+                {
+                    page.Header = header;
+                }
+
+                Console.Write($"Main Image URL: ({ page.MainImageUrl })");
+                string mainImageUrl = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(mainImageUrl))
+                {
+                    page.MainImageUrl = header;
+                }
+
+                connector.UpsertRecords("Pages", page.Id, page);
+                Console.WriteLine($"{ Environment.NewLine }Document updated!");
+            }
         }
 
         private void DeleteWebPageDocumentById()
@@ -73,7 +99,7 @@ namespace MongoDbSampleApp.BusinessLogic
             Guid id = new Guid(Console.ReadLine().Trim());
 
             connector.DeleteRecord<WebPage>("Pages", id);
-            Console.WriteLine($"{ Environment.NewLine }Document deleted");
+            Console.WriteLine($"{ Environment.NewLine }Document deleted!");
         }
 
         private void ShowDetailsForWebPageDocumentById()
