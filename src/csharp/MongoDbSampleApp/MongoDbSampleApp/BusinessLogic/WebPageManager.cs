@@ -1,6 +1,8 @@
-﻿using MongoDbSampleApp.Models;
+﻿using MongoDbSampleApp.Helpers;
+using MongoDbSampleApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MongoDbSampleApp.BusinessLogic
@@ -11,183 +13,61 @@ namespace MongoDbSampleApp.BusinessLogic
 
         public bool ExitApp { get; private set; }
 
-        public WebPageManager()
+        public WebPageManager(string databaseName = Constants.PAGES_DB_NAME)
         {
-            connector = new MongoConnector("PagesDb");
+            connector = new MongoConnector(databaseName);
         }
 
         public void ProcessCommand(string commandTriggered)
         {
             if (string.IsNullOrWhiteSpace(commandTriggered))
             {
-                Console.WriteLine("Invalid command entered, please try again.");
+                Console.WriteLine(Constants.INVALID_COMMAND);
             }
             else
             {
                 Console.WriteLine();
-                switch (commandTriggered.ToLowerInvariant().Trim())
-                {
-                    case "-help":
-                        WriteCommandList();
-                        break;
-
-                    case "-i":
-                        InsertNewWebPageDocument();
-                        break;
-
-                    case "-u":
-                        UpdateWebPageDocumentById();
-                        break;
-
-                    case "-d":
-                        DeleteWebPageDocumentById();
-                        break;
-
-                    case "-g":
-                        ShowDetailsForWebPageDocumentById();
-                        break;
-
-                    case "-ga":
-                        ShowDetailsForAllWebPageDocuments();
-                        break;
-
-                    case "-e":
-                        ExitApp = true;
-                        break;
-
-                    default:
-                        break;
-                }
+                ProcessSpecificCommand(commandTriggered);
                 Console.WriteLine();
             }
         }
 
-        private void UpdateWebPageDocumentById()
+        private void ProcessSpecificCommand(string commandTriggered)
         {
-            Console.Write("Guid (ID): ");
-            Guid id = new Guid(Console.ReadLine().Trim());
-
-            WebPage page = connector.LoadRecordById<WebPage>("Pages", id);
-
-            if (page != null)
+            switch (commandTriggered.ToLowerInvariant().Trim())
             {
-                // Just allowing Header/Main Image URL updates, for now
-                Console.Write($"Header: ({ page.Header })");
-                string header = Console.ReadLine();
+                case Constants.HELP_COMMAND:
+                    WriteCommandList();
+                    break;
 
-                if (!string.IsNullOrWhiteSpace(header))
-                {
-                    page.Header = header;
-                }
+                case Constants.INSERT_COMMAND:
+                    InsertNewWebPageDocument();
+                    break;
 
-                Console.Write($"Main Image URL: ({ page.MainImageUrl })");
-                string mainImageUrl = Console.ReadLine();
+                case Constants.UPDATE_COMMAND:
+                    UpdateWebPageDocumentById();
+                    break;
 
-                if (!string.IsNullOrWhiteSpace(mainImageUrl))
-                {
-                    page.MainImageUrl = header;
-                }
+                case Constants.DELETE_COMMAND:
+                    DeleteWebPageDocumentById();
+                    break;
 
-                connector.UpsertRecords("Pages", page.Id, page);
-                Console.WriteLine($"{ Environment.NewLine }Document updated!");
+                case Constants.GET_COMMAND:
+                    GetDetailsForWebPageDocumentById();
+                    break;
+
+                case Constants.GETALL_COMMAND:
+                    GetDetailsForAllWebPageDocuments();
+                    break;
+
+                case Constants.EXIT_COMMAND:
+                    ExitApp = true;
+                    break;
+
+                default:
+                    Console.WriteLine(Constants.INVALID_COMMAND);
+                    break;
             }
-        }
-
-        private void DeleteWebPageDocumentById()
-        {
-            Console.Write("Guid (ID): ");
-            Guid id = new Guid(Console.ReadLine().Trim());
-
-            connector.DeleteRecord<WebPage>("Pages", id);
-            Console.WriteLine($"{ Environment.NewLine }Document deleted!");
-        }
-
-        private void ShowDetailsForWebPageDocumentById()
-        {
-            Console.Write("Guid (ID): ");
-            Guid id = new Guid(Console.ReadLine().Trim());
-
-            WebPage page = connector.LoadRecordById<WebPage>("Pages", id);
-
-            if (page != null)
-            {
-                Console.WriteLine($"{ Environment.NewLine }Page ID: { page.Id } | Header: { page.Header } | Main Image URL: { page.MainImageUrl }{ Environment.NewLine }");
-                Console.WriteLine("Query complete...");
-            }
-        }
-
-        private void ShowDetailsForAllWebPageDocuments()
-        {
-            List<WebPage> pages = connector.LoadRecords<WebPage>("Pages");
-
-            if (pages?.Count > 0)
-            {
-                StringBuilder pageDetails = new StringBuilder();
-                pages.ForEach(page => pageDetails.AppendLine($"Page ID: { page.Id } | Header: { page.Header } | Main Image URL: { page.MainImageUrl }"));
-                Console.WriteLine(pageDetails.ToString());
-                Console.WriteLine("Query complete...");
-            }
-        }
-
-        private void InsertNewWebPageDocument()
-        {
-            WebPage newWebPageDocument = new WebPage();
-
-            Console.Write("Header: ");
-            string header = Console.ReadLine();
-
-            Console.Write("Main Image URL: ");
-            string mainImageUrl = Console.ReadLine();
-
-            Console.Write("Paragraphs (pipe separated): ");
-            string paragraphString = Console.ReadLine();
-            List<string> paragraphs = new List<string>();
-
-            if (!string.IsNullOrWhiteSpace(paragraphString))
-            {
-                paragraphs.AddRange(paragraphString.Split('|'));
-            }
-
-            Console.Write("Add Widgets (Y/N): ");
-
-            List<Widget> widgets = new List<Widget>();
-            if (Console.ReadKey().Key == ConsoleKey.Y)
-            {
-                string widgetName, targetUrl;
-
-                do
-                {
-                    Console.Write($"{ Environment.NewLine }Widget Name: ");
-                    widgetName = Console.ReadLine();
-
-                    Console.Write("Target URL: ");
-                    targetUrl = Console.ReadLine();
-
-                    widgets.Add(new Widget
-                    {
-                        Name = widgetName,
-                        TargetUrl = targetUrl
-                    });
-
-                    Console.Write("Add another (Y/N)?: ");
-                } while (Console.ReadKey().Key == ConsoleKey.Y);
-            }
-
-            newWebPageDocument.Header = header;
-            newWebPageDocument.MainImageUrl = mainImageUrl;
-
-            if (paragraphs?.Count > 0)
-            {
-                newWebPageDocument.Paragraphs.AddRange(paragraphs);
-            }
-
-            if (widgets?.Count > 0)
-            {
-                newWebPageDocument.Widgets.AddRange(widgets);
-            }
-
-            connector.InsertRecord("Pages", newWebPageDocument);
-            Console.WriteLine($"{ Environment.NewLine }{ Environment.NewLine }Document added!");
         }
 
         private void WriteCommandList()
@@ -199,5 +79,340 @@ namespace MongoDbSampleApp.BusinessLogic
                 .AppendLine("'-g' = get details an existing web page document (by id)")
                 .AppendLine("'-ga' = get details on all existing web page documents").ToString());
         }
+
+        #region Add Web Page Document
+
+        private void InsertNewWebPageDocument()
+        {
+            if (TryAddWebPageFromUserInput(out WebPage newWebPageDocument))
+            {
+                connector.InsertRecord(Constants.PAGES_TABLE_NAME, newWebPageDocument);
+                Console.WriteLine($"{ Environment.NewLine }{ Environment.NewLine }Document added!");
+            }
+            else
+            {
+                Console.WriteLine($"{ Environment.NewLine }{ Environment.NewLine }Due to parsing errors the new WebPage object could not be added to MongoDB.");
+            }
+        }
+
+        private bool TryAddWebPageFromUserInput(out WebPage newWebPageDocument)
+        {
+            newWebPageDocument = new WebPage();
+
+            if (!AddBasicPageMetadata(newWebPageDocument))
+            {
+                return false;
+            }
+
+            if (!AddWidgetPageMetadata(newWebPageDocument))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool AddBasicPageMetadata(WebPage newWebPageDocument)
+        {
+            if (!TryGetInput("Header: ", out string header))
+            {
+                return false;
+            }
+            else
+            {
+                newWebPageDocument.Header = header;
+            }
+
+            if (!TryGetInput("Main Image URL: ", out string mainImageUrl))
+            {
+                return false;
+            }
+            else
+            {
+                newWebPageDocument.MainImageUrl = mainImageUrl;
+            }
+
+            if (!TryGetInput("Paragraphs (pipe separated): ", out List<string> paragraphs,
+                (inputValue) =>
+                {
+                    return !string.IsNullOrWhiteSpace(inputValue) ? inputValue.Split('|').ToList() : new List<string>();
+                }))
+            {
+                return false;
+            }
+            else
+            {
+                newWebPageDocument.Paragraphs.AddRange(paragraphs);
+            }
+
+            return true;
+        }
+
+        private bool AddWidgetPageMetadata(WebPage newWebPageDocument)
+        {
+            bool widgetAdditionsSuccessful = true;
+
+            Console.Write("Add Widgets (Y/N): ");
+
+            if (Console.ReadKey().Key == ConsoleKey.Y)
+            {
+                do
+                {
+                    if (TryGetWidgetFromUserInput(out Widget widget))
+                    {
+                        newWebPageDocument.Widgets.Add(widget);
+                    }
+                    else
+                    {
+                        widgetAdditionsSuccessful = false;
+                    }
+
+                    Console.Write("Add another (Y/N)?: ");
+                } while (Console.ReadKey().Key == ConsoleKey.Y || !widgetAdditionsSuccessful);
+            }
+
+            return widgetAdditionsSuccessful;
+        }
+
+        private bool TryGetWidgetFromUserInput(out Widget widget)
+        {
+            widget = new Widget();
+
+            if (!TryGetInput("Widget Name: ", out string widgetName))
+            {
+                return false;
+            }
+            else
+            {
+                widget.Name = widgetName;
+            }
+
+            if (!TryGetInput("Target URL: ", out string widgetTargetUrl))
+            {
+                return false;
+            }
+            else
+            {
+                widget.TargetUrl = widgetTargetUrl;
+            }
+
+            return true;
+        }
+
+        #endregion Add Web Page Document
+
+        #region Update Web Page Document
+
+        private void UpdateWebPageDocumentById()
+        {
+            if (TryGetInput<Guid>("Guid (ID): ", out Guid id))
+            {
+                WebPage page = connector.LoadRecordById<WebPage>(Constants.PAGES_TABLE_NAME, id);
+
+                if (page != null)
+                {
+                    if (TryUpdateWebPageFromUserInput(page))
+                    {
+                        connector.UpsertRecords(Constants.PAGES_TABLE_NAME, page.Id, page);
+                        Console.WriteLine($"{ Environment.NewLine }Document updated!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Page could not be updated.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"No Page found matching ID: { id }.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Update cannot be performed as the provided value is not a Guid.");
+            }
+        }
+
+        private bool TryUpdateWebPageFromUserInput(WebPage existingWebPageDocument)
+        {
+            if (!UpdateBasicPageMetadata(existingWebPageDocument))
+            {
+                return false;
+            }
+
+            if (!UpdateWidgetPageMetadata(existingWebPageDocument))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool UpdateBasicPageMetadata(WebPage existingWebPageDocument)
+        {
+            if (!UserWantsToKeepValue($"Header: ({ existingWebPageDocument.Header })"))
+            {
+                if (!TryGetInput("Header: ", out string header))
+                {
+                    return false;
+                }
+                else
+                {
+                    existingWebPageDocument.Header = header;
+                }
+            }
+
+            if (!UserWantsToKeepValue($"Main Image URL: ({ existingWebPageDocument.MainImageUrl })"))
+            {
+                if (!TryGetInput("Main Image URL: ", out string mainImageUrl))
+                {
+                    return false;
+                }
+                else
+                {
+                    existingWebPageDocument.MainImageUrl = mainImageUrl;
+                }
+            }
+
+            if (!UserWantsToKeepValue($"Paragraphs (pipe separated): ({ string.Join("|", existingWebPageDocument.Paragraphs) })"))
+            {
+                if (!TryGetInput("Paragraphs (pipe separated): ", out List<string> paragraphs,
+                    (inputValue) =>
+                    {
+                        return !string.IsNullOrWhiteSpace(inputValue) ? inputValue.Split('|').ToList() : new List<string>();
+                    }))
+                {
+                    return false;
+                }
+                else
+                {
+                    existingWebPageDocument.Paragraphs.AddRange(paragraphs);
+                }
+            }
+
+            return true;
+        }
+
+        private bool UpdateWidgetPageMetadata(WebPage existingWebPageDocument)
+        {
+            bool widgetAdditionsSuccessful = true;
+
+            Console.Write("Add Widgets (Y/N): ");
+
+            if (Console.ReadKey().Key == ConsoleKey.Y)
+            {
+                do
+                {
+                    if (TryUpdateWidgetFromUserInput(out Widget widget))
+                    {
+                        existingWebPageDocument.Widgets.Add(widget);
+                    }
+                    else
+                    {
+                        widgetAdditionsSuccessful = false;
+                    }
+
+                    Console.Write("Add another (Y/N)?: ");
+                } while (Console.ReadKey().Key == ConsoleKey.Y || !widgetAdditionsSuccessful);
+            }
+
+            return widgetAdditionsSuccessful;
+        }
+
+        private bool TryUpdateWidgetFromUserInput(out Widget widget)
+        {
+            widget = new Widget();
+
+            if (!UserWantsToKeepValue($"Widget Name: ({ widget.Name })"))
+            {
+                if (!TryGetInput("Widget Name: ", out string widgetName))
+                {
+                    return false;
+                }
+                else
+                {
+                    widget.Name = widgetName;
+                }
+            }
+
+            if (!UserWantsToKeepValue($"Target URL: ({ widget.TargetUrl })"))
+            {
+                if (!TryGetInput("Target URL: ", out string widgetTargetUrl))
+                {
+                    return false;
+                }
+                else
+                {
+                    widget.TargetUrl = widgetTargetUrl;
+                }
+            }
+
+            return true;
+        }
+
+        #endregion Update Web Page Document
+
+        #region Delete Web Page Document
+
+        private void DeleteWebPageDocumentById()
+        {
+            Console.Write("Guid (ID): ");
+            Guid id = new Guid(Console.ReadLine().Trim());
+
+            connector.DeleteRecord<WebPage>(Constants.PAGES_TABLE_NAME, id);
+            Console.WriteLine($"{ Environment.NewLine }Document deleted!");
+        }
+
+        #endregion Delete Web Page Document
+
+        #region Get Web Page Document (single)
+
+        private void GetDetailsForWebPageDocumentById()
+        {
+            Console.Write("Guid (ID): ");
+            Guid id = new Guid(Console.ReadLine().Trim());
+
+            WebPage page = connector.LoadRecordById<WebPage>(Constants.PAGES_TABLE_NAME, id);
+
+            if (page != null)
+            {
+                Console.WriteLine($"{ Environment.NewLine }Page ID: { page.Id } | Header: { page.Header } | Main Image URL: { page.MainImageUrl }{ Environment.NewLine }");
+                Console.WriteLine("Query complete!");
+            }
+        }
+
+        #endregion Get Web Page Document (single)
+
+        #region Get Web Page Document (all)
+
+        private void GetDetailsForAllWebPageDocuments()
+        {
+            List<WebPage> pages = connector.LoadRecords<WebPage>(Constants.PAGES_TABLE_NAME);
+
+            if (pages?.Count > 0)
+            {
+                StringBuilder pageDetails = new StringBuilder();
+                pages.ForEach(page => pageDetails.AppendLine($"Page ID: { page.Id } | Header: { page.Header } | Main Image URL: { page.MainImageUrl }"));
+                Console.WriteLine(pageDetails.ToString());
+                Console.WriteLine("Query complete!");
+            }
+        }
+
+        #endregion Get Web Page Document (all)
+
+        #region Helpers
+
+        private static bool UserWantsToKeepValue(string prompt)
+        {
+            Console.Write($"{ prompt } - Keep value (-k to keep)? ");
+            return Console.ReadLine().Trim().Equals(Constants.KEEP_COMMAND, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        private static bool TryGetInput<T>(string prompt, out T parsedValue, Func<string, T> providedParser = null)
+        {
+            Console.WriteLine(prompt);
+            return Console.ReadLine().TryParseValueFromUser<T>(out parsedValue, providedParser);
+        }
+
+        #endregion Helpers
     }
 }
