@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace MongoDbSampleApp.Helpers
 {
@@ -23,7 +24,15 @@ namespace MongoDbSampleApp.Helpers
                 else
                 {
                     Type type = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
-                    parsedValue = (T)Convert.ChangeType(inputValue, type);
+
+                    if (type == typeof(Guid))
+                    {
+                        parsedValue = (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromInvariantString(inputValue);
+                    }
+                    else
+                    {
+                        parsedValue = (T)Convert.ChangeType(inputValue, type);
+                    }
                 }
 
                 parsedSuccessful = true;

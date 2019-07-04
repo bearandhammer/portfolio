@@ -409,7 +409,7 @@ namespace MongoDbSampleApp.BusinessLogic
 
         private static bool TryGetInput<T>(string prompt, out T parsedValue, Func<string, T> providedParser = null)
         {
-            Console.WriteLine(prompt);
+            Console.Write(prompt);
             return Console.ReadLine().TryParseValueFromUser<T>(out parsedValue, providedParser);
         }
 
