@@ -31,12 +31,14 @@
                     <div class="card">
                         <div class="card-header">
                             Various Tables
+                            <!--Singular search control where the search term itself applies directly to each tabbed table (when switching tabs)-->
                             <span class="float-right">
                                 <input id="SearchEntitiesInput" class="form-control" type="text" name="search" placeholder="Search" />
                                 <i class="fas fa-search search-icon"></i>
                             </span>
                         </div>
                         <div class="card-body">
+                            <!--Tab definitions - each tab contains a table that can searched/sorted individually-->
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="football-fixtures-tab" data-toggle="tab" href="#football-fixtures-tab-content" role="tab" aria-controls="football-fixtures-tab-content" aria-selected="true">Football Fixtures</a>
@@ -48,11 +50,13 @@
                                     <a class="nav-link" id="martial-artists-tab" data-toggle="tab" href="#martial-artists-tab-content" role="tab" aria-controls="martial-artists-tab-content" aria-selected="false">Martial Artists</a>
                                 </li>
                             </ul>
+                            <!--Tabbed content (containing three sample tables registered/configured using datatable-module.js)-->
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="football-fixtures-tab-content" role="tabpanel" aria-labelledby="football-fixtures-tab">
                                     <table id="football-fixtures" class="table">
                                         <thead>
                                             <tr>
+                                                <!--Football Fixtures - ordered by Date descending, as specified by the default-order-column-desc class. Ordering is disabled on the last column-->
                                                 <th>Fixture Teams<i class="d-none float-right fas"></i></th>
                                                 <th class="default-order-column-desc">Date<i class="d-none float-right fas"></i></th>
                                                 <th>Officials Selected<i class="d-none float-right fas"></i></th>
@@ -107,8 +111,9 @@
                                     <table id="food-festivals" class="table">
                                         <thead>
                                             <tr>
-                                                <th>Festival Name<i class="d-none float-right fas"></i></th>
-                                                <th class="default-order-column-desc">Date<i class="d-none float-right fas"></i></th>
+                                                <!--Food Festivals - ordered by Festival Name ascending, as specified by the default-order-column-asc class. Ordering is disabled on the last column-->
+                                                <th class="default-order-column-asc">Festival Name<i class="d-none float-right fas"></i></th>
+                                                <th>Date<i class="d-none float-right fas"></i></th>
                                                 <th>Theme<i class="d-none float-right fas"></i></th>
                                                 <th>Sells Alcohol<i class="d-none float-right fas"></i></th>
                                                 <th class="disable-ordering"></th>
@@ -149,7 +154,8 @@
                                     <table id="martial-artists" class="table">
                                         <thead>
                                             <tr>
-                                                <th class="default-order-column-desc">Name<i class="d-none float-right fas"></i></th>
+                                                <!--Martial Artists - ordered by Name ascending, as specified by the default-order-column-asc class. Ordering is disabled on the last column-->
+                                                <th class="default-order-column-asc">Name<i class="d-none float-right fas"></i></th>
                                                 <th>Best Trait<i class="d-none float-right fas"></i></th>
                                                 <th class="disable-ordering"></th>
                                             </tr>
