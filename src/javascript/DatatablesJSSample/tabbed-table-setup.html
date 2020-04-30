@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Tabbed Table Setup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/table-example.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/datatable-module.js"></script>
+    <script>
+        $(function () {
+            // Configure the dataTablesNetTabbedModule (handling stock table setup, options & events). 
+            // Then, register tables (using an each here so that, when the Workshops table is added, it'll be automatically detected and set up - more robust if Ids change also)
+            dataTablesNetTabbedModule.configure(['#SearchEntitiesInput']);
+            $('table').each(function () {
+                dataTablesNetTabbedModule.registerDataTableById('#' + $(this).attr('id').trim());
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="mt-1 mb-2">
+            <h1 class="d-inline">Tabbed Table Example</h1>
+            <a class="btn btn-primary float-right mt-2" href="multi-tables.html">See Multi-table Example</a>
+        </div>
+        <div id="ContentContainer">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Various Tables
+                            <span class="float-right">
+                                <input id="SearchEntitiesInput" class="form-control" type="text" name="search" placeholder="Search" />
+                                <i class="fas fa-search search-icon"></i>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="football-fixtures-tab" data-toggle="tab" href="#football-fixtures-tab-content" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="festivals-tab" data-toggle="tab" href="#festivals-tab-content" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="martial-artists-tab" data-toggle="tab" href="#martial-artists-tab-content" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="football-fixtures-tab-content" role="tabpanel" aria-labelledby="home-tab">
+                                    <table id="football-fixtures" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Fixture Teams<i class="d-none float-right fas"></i></th>
+                                                <th class="default-order-column-desc">Date<i class="d-none float-right fas"></i></th>
+                                                <th>Officials Selected<i class="d-none float-right fas"></i></th>
+                                                <th class="disable-ordering"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Norwich City FC vs Manchester United FC</td>
+                                                <td>6th Sept 2020</td>
+                                                <td>Yes</td> 
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Manchester City FC vs Norwich City FC</td>
+                                                <td>31st August 2020</td>
+                                                <td>No</td> 
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Arsenal FC vs Liverpool FC</td>
+                                                <td>12th September 2020</td>
+                                                <td>No</td> 
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Liverpool FC vs Southampton FC</td>
+                                                <td>30th July 2020</td>
+                                                <td>Yes</td> 
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Liverpool FC vs Norwich City FC</td>
+                                                <td>15th August 2020</td>
+                                                <td>Yes</td> 
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="festivals-tab-content" role="tabpanel" aria-labelledby="profile-tab">
+                                    <table id="food-festivals" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Festival Name<i class="d-none float-right fas"></i></th>
+                                                <th class="default-order-column-desc">Date<i class="d-none float-right fas"></i></th>
+                                                <th>Theme<i class="d-none float-right fas"></i></th>
+                                                <th>Sells Alcohol<i class="d-none float-right fas"></i></th>
+                                                <th class="disable-ordering"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mulbarton Food Festival</td>
+                                                <td>12th April 2021</td>
+                                                <td>Vegan Food</td> 
+                                                <td>Yes</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Festival</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grand Tea Party</td>
+                                                <td>1st March 2021</td>
+                                                <td>Dainty Sandwiches</td>
+                                                <td>No</td> 
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Festival</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>BBQ Delights</td>
+                                                <td>12th September 2020</td>
+                                                <td>BBQ Food</td>
+                                                <td>Yes</td> 
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Festival</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="martial-artists-tab-content" role="tabpanel" aria-labelledby="contact-tab">
+                                    <table id="martial-artists" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="default-order-column-desc">Name<i class="d-none float-right fas"></i></th>
+                                                <th>Best Trait<i class="d-none float-right fas"></i></th>
+                                                <th class="disable-ordering"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Bruce Lee</td>
+                                                <td>Everything</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Martial Artist</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jet Li</td>
+                                                <td>Speed</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Martial Artist</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jackie Chan</td>
+                                                <td>Stunts</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Martial Artist</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cynthia Rothrock</td>
+                                                <td>Kicks</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Martial Artist</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chuck Norris</td>
+                                                <td>Memes & Facts</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Martial Artist</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tony Jaa</td>
+                                                <td>Knees & Elbows</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary float-right">Edit Martial Artist</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
