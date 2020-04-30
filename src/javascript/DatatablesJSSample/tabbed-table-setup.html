@@ -12,16 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="js/datatable-module.js"></script>
-    <script>
-        $(function () {
-            // Configure the dataTablesNetTabbedModule (handling stock table setup, options & events). 
-            // Then, register tables (using an each here so that, when the Workshops table is added, it'll be automatically detected and set up - more robust if Ids change also)
-            dataTablesNetTabbedModule.configure(['#SearchEntitiesInput']);
-            $('table').each(function () {
-                dataTablesNetTabbedModule.registerDataTableById('#' + $(this).attr('id').trim());
-            });
-        })
-    </script>
+    <script type="text/javascript" src="js/tabbed-table-setup.js"></script>
 </head>
 <body>
     <div class="container-fluid">

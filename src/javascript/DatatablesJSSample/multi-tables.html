@@ -10,16 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="js/datatable-module.js"></script>
-    <script>
-        $(function () {
-            // Configure the dataTablesNetTabbedModule (handling stock table setup, options & events). 
-            // Then, register tables (using an each here so that for automatic table detection - more robust if Ids change also)
-            dataTablesNetTabbedModule.configure(['#SearchFootballFixturesInput', '#SearchFoodFestivalsInput']);
-            $('table').each(function () {
-                dataTablesNetTabbedModule.registerDataTableById('#' + $(this).attr('id').trim());
-            });
-        })
-    </script>
+    <script type="text/javascript" src="js/multi-tables.js"></script>
 </head>
 <body>
     <div class="container-fluid">
