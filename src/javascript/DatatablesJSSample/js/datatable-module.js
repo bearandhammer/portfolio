@@ -40,10 +40,6 @@ var dataTablesNetTabbedModule = (function () {
 
             searchInputIds.forEach(searchInputId =>
             {
-                $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-                    searchActiveTable($(searchInputId));
-                })
-
                 if ($(searchInputId).length > 0) {
                     // Setup events only if the searchInputId is configured/discovered
                     $('.container-fluid').on('keyup', searchInputId, function () {
@@ -53,7 +49,7 @@ var dataTablesNetTabbedModule = (function () {
                     // Only perform the event hook if '.nav-tabs' exist. If a more complicated page configuration is needed we will only want events
                     // to hook up/fire (trigger) when the tab is tied to a table. Overly complex to cater for that at this time, however
                     if (tabsPresent) {
-                        $('.container-fluid').on('click', '.nav-tabs', function () {
+                        $('.container-fluid').on('shown.bs.tab', 'a[data-toggle="tab"]', function () {
                             searchActiveTable($(searchInputId));
                         });
                     }
