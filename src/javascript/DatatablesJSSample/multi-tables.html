@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Table Setup</title>
+    <!--Bootstrap/Fontawesome - included simply to make the sample more 'complete'-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <!--An abstraction available for any additional styling (again, not the primary purpose of this sample, but nice to have on hand)-->
+    <link rel="stylesheet" href="css/table-example.css">
+    <!--jQuery as required by datatables.js-->
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <!--Physical datatables.js script reference, which is the library we are adding support to-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <!--Sample module code on show, along with some JS to register/configure tables-->
+    <script type="text/javascript" src="js/datatable-module.js"></script>
+    <script type="text/javascript" src="js/multi-tables.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="mt-1 mb-2">
+            <h1 class="d-inline">Multiple Table Example</h1>
+            <a class="btn btn-primary float-right mt-2" href="tabbed-table-setup.html">See Tabbed Example</a>
+        </div>
+        <div id="FootballFixturesTableContainer" class="table-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Football Fixtures
+                            <span class="float-right">
+                                <input id="SearchFootballFixturesInput" class="form-control" type="text" name="search" placeholder="Search Fixtures" />
+                                <i class="fas fa-search search-icon"></i>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <table id="football-fixtures" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Fixture Teams<i class="d-none float-right fas"></i></th>
+                                        <th class="default-order-column-desc">Date<i class="d-none float-right fas"></i></th>
+                                        <th>Officials Selected<i class="d-none float-right fas"></i></th>
+                                        <th class="disable-ordering"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Norwich City FC vs Manchester United FC</td>
+                                        <td data-sort="1599350400">6th September 2020</td>
+                                        <td>Yes</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Manchester City FC vs Norwich City FC</td>
+                                        <td data-sort="1598832000">31st August 2020</td>
+                                        <td>No</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arsenal FC vs Liverpool FC</td>
+                                        <td data-sort="1599868800">12th September 2020</td>
+                                        <td>No</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Liverpool FC vs Southampton FC</td>
+                                        <td data-sort="1596067200">30th July 2020</td>
+                                        <td>Yes</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Liverpool FC vs Norwich City FC</td>
+                                        <td data-sort="1597449600">15th August 2020</td>
+                                        <td>Yes</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Fixture</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="FoodFestivalsTableContainer" class="table-container mt-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Festivals
+                            <span class="input-iconised float-right">
+                                <input id="SearchFoodFestivalsInput" class="form-control" type="text" name="search" placeholder="Search Festivals" />
+                                <i class="fa fa-search search-icon"></i>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <table id="food-festivals" class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="default-order-column-asc">Festival Name<i class="d-none float-right fas"></i></th>
+                                        <th>Date<i class="d-none float-right fas"></i></th>
+                                        <th>Theme<i class="d-none float-right fas"></i></th>
+                                        <th>Sells Alcohol<i class="d-none float-right fas"></i></th>
+                                        <th class="disable-ordering"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mulbarton Food Festival</td>
+                                        <td data-sort="1618185600">12th April 2021</td>
+                                        <td>Vegan Food</td> 
+                                        <td>Yes</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Festival</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Tea Party</td>
+                                        <td data-sort="1614556800">1st March 2021</td>
+                                        <td>Dainty Sandwiches</td>
+                                        <td>No</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Festival</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>BBQ Delights</td>
+                                        <td data-sort="1599868800">12th September 2020</td>
+                                        <td>BBQ Food</td>
+                                        <td>Yes</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-primary float-right">Edit Festival</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
