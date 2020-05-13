@@ -11,8 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\DinoIpsum.Services\DinoIpsum.Services.csproj" />
   </ItemGroup>
 
 </Project>
