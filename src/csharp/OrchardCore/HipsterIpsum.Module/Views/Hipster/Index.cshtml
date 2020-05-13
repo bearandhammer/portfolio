@@ -1,0 +1,29 @@
+﻿@using HipsterIpsum.Module.ViewModels;
+@model HipsterIpsumViewModel
+@{
+    ViewData["Title"] = "Hipster Ipsum";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/HipsterIpsum.Module/css/hipster-index.css" />
+}
+@*@section Scripts {
+    <script type="text/javascript" src="~/JeffSum.Module/js/jeff-index.js"></script>
+}*@
+<div>
+    <h2 class="mb-4">Hipster Ipsum Content</h2>
+    <p>If you're looking for some 'Hipster Lorem Ipsum' this is the place to find it. You can find three paragraphs of goodness below, arranged into cards.</p>
+    <p>Data sourced using the <a href="https://hipsum.co/the-api/">Hipster Ipsum</a> API.</p>
+    <div class="row row-cols-1 row-cols-md-3">
+        @foreach (CardViewModel cardViewModel in Model.Cards)
+        {
+            <div class="col mb-4">
+                <div class="card text-white bg-dark">
+                    <div class="card-header">Hipster Paragraph @cardViewModel.Number</div>
+                    <div class="card-body">
+                        <p class="card-text">@cardViewModel.Content</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

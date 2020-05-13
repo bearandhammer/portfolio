@@ -1,6 +1,12 @@
-﻿namespace Jeff.Services.Interfaces
+﻿using Services.Shared.Interfaces;
+
+namespace JeffSum.Services.Interfaces
 {
-    public interface IJeffIpsumService
+    /// <summary>
+    /// Interface for any customisations to (and for easier DI of) the
+    /// Jeff Ipsum service types.
+    /// </summary>
+    public interface IJeffIpsumService : IIpsumService
     {
     }
 }

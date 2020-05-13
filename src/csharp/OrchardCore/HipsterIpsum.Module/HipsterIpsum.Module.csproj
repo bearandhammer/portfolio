@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jeff.Services\JeffSum.Services.csproj" />
+    <ProjectReference Include="..\HipsterIpsum.Services\HipsterIpsum.Services.csproj" />
   </ItemGroup>
 
 </Project>

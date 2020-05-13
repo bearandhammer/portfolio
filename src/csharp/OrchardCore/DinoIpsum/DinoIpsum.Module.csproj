@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jeff.Services\JeffSum.Services.csproj" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

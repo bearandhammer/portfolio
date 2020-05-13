@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HipsterIpsum.Module\HipsterIpsum.Module.csproj" />
     <ProjectReference Include="..\JeffSum.Module\JeffSum.Module.csproj" />
   </ItemGroup>
 
