@@ -15,7 +15,6 @@ namespace JeffSum.Module
 
         public void Configure(IEndpointRouteBuilder endpoints)
         {
-
         }
     }
 }
