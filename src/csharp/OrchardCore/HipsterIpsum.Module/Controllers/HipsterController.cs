@@ -9,6 +9,6 @@ namespace HipsterIpsum.Module.Controllers
     public class HipsterController : Controller
     {
         public async Task<IActionResult> Index([FromServices] IHipsterIpsumService hipsterIpsumService) => 
-            View(new HipsterIpsumViewModel(await hipsterIpsumService.GetIpsumParagraphs(3)));
+            View(new HipsterIpsumViewModel(await hipsterIpsumService.GetIpsumParagraphsAsync(3)));
     }
 }

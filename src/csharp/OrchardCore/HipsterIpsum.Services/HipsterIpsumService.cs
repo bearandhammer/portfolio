@@ -1,6 +1,5 @@
 ﻿using HipsterIpsum.Services.Interfaces;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace HipsterIpsum.Services
 {
     public class HipsterIpsumService : IHipsterIpsumService
     {
-        public async Task<List<string>> GetIpsumParagraphs(int paragraphCount)
+        public async Task<List<string>> GetIpsumParagraphsAsync(int paragraphCount)
         {
             List<string> generatedParagraphs = new List<string>();
 

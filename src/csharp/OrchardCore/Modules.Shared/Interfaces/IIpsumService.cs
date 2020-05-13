@@ -14,6 +14,6 @@ namespace Services.Shared.Interfaces
         /// </summary>
         /// <param name="paragraphCount">The desired amount of paragraphs.</param>
         /// <returns>A string of Ipsum content.</returns>
-        Task<List<string>> GetIpsumParagraphs(int paragraphCount);
+        Task<List<string>> GetIpsumParagraphsAsync(int paragraphCount);
     }
 }

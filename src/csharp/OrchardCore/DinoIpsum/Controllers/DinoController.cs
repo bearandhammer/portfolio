@@ -9,6 +9,6 @@ namespace DinoIpsum.Module.Controllers
     public class DinoController : Controller
     {
         public async Task<IActionResult> Index([FromServices] IDinoIpsumService dinoIpsumService) =>
-            View(new DinoIpsumViewModel(await dinoIpsumService.GetIpsumParagraphs(3)));
+            View(new DinoIpsumViewModel(await dinoIpsumService.GetIpsumParagraphsAsync(3)));
     }
 }

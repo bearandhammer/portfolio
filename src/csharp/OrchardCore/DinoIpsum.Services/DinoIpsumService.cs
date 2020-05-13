@@ -9,7 +9,7 @@ namespace DinoIpsum.Services
 {
     public class DinoIpsumService : IDinoIpsumService
     {
-        public async Task<List<string>> GetIpsumParagraphs(int paragraphCount)
+        public async Task<List<string>> GetIpsumParagraphsAsync(int paragraphCount)
         {
             List<List<string>> generatedParagraphs = new List<List<string>>();
 

@@ -20,6 +20,6 @@ namespace JeffSum.Module.Controllers
         /// <param name="jeffIpsumService">A service for 'receiving the Jeff'.</param>
         /// <returns>Jeff Goldblum Ipsum content to the designated View (fixed to 5 paragraphs, for example purposes).</returns>
         public async Task<IActionResult> Index([FromServices] IJeffIpsumService jeffIpsumService) =>
-            View(new JeffIpsumViewModel(string.Join($"{ Environment.NewLine }{ Environment.NewLine }", await jeffIpsumService.GetIpsumParagraphs(5))));
+            View(new JeffIpsumViewModel(string.Join($"{ Environment.NewLine }{ Environment.NewLine }", await jeffIpsumService.GetIpsumParagraphsAsync(5))));
     }
 }

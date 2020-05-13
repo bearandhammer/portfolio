@@ -13,6 +13,6 @@ namespace JeffSum.Services.Services
     public class JeffIpsumService : IJeffIpsumService
     {
         /// <inheritdoc/>
-        public async Task<List<string>> GetIpsumParagraphs(int paragraphCount) => await Task.Run(() => Goldblum.ReceiveTheJeff(paragraphCount).ToList());
+        public async Task<List<string>> GetIpsumParagraphsAsync(int paragraphCount) => await Task.Run(() => Goldblum.ReceiveTheJeff(paragraphCount).ToList());
     }
 }
