@@ -1,11 +1,9 @@
 ﻿using DinoIpsum.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Modules.Shared.Configuration;
-using Newtonsoft.Json;
 using Services.Shared.Base;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace DinoIpsum.Services
@@ -15,7 +13,6 @@ namespace DinoIpsum.Services
         public DinoIpsumService(IConfiguration configProvider)
             : base(configProvider)
         {
-
         }
 
         public async Task<List<string>> GetIpsumParagraphsAsync(int paragraphCount)
