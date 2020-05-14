@@ -1,10 +1,10 @@
 ﻿using Services.Shared.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HipsterIpsum.Services.Interfaces
 {
+    /// <summary>
+    /// Interface for obtaining hipster-related Lorem Ipsum content.
+    /// </summary>
     public interface IHipsterIpsumService : IIpsumService
     {
     }
