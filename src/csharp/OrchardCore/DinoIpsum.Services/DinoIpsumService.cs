@@ -15,7 +15,7 @@ namespace DinoIpsum.Services
     public class DinoIpsumService : BaseApiService, IDinoIpsumService
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="JeffIpsumViewModel"/> class.
+        /// Initializes a new instance of the <see cref="DinoIpsumService"/> class.
         /// Chains in relevant services as needed.
         /// </summary>
         /// <param name="configProvider">An <see cref="IConfiguration"/> type allowing access to application settings - passed to the base class.</param>
