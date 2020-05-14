@@ -4,8 +4,16 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DinoIpsum
 {
+    /// <summary>
+    /// Core class that sets up the module for use.
+    /// </summary>
     public class Startup
-    {        // This method gets called by the runtime. Use this method to add services to the container.
+    {
+        /// <summary>
+        /// Configures dependencies (such as services) for use throughout the module, as
+        /// injected entities, for example.
+        /// </summary>
+        /// <param name="services">An <see cref="IServiceCollection"/> type ready to gather up registered dependencies.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IDinoIpsumService, DinoIpsumService>();
