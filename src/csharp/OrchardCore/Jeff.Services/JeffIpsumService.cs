@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JeffSum.Services.Services
+namespace JeffSum.Services
 {
     /// <summary>
     /// Represents a service that provides Jeff Goldlum
