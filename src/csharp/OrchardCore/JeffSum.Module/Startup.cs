@@ -1,5 +1,5 @@
+using JeffSum.Services;
 using JeffSum.Services.Interfaces;
-using JeffSum.Services.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JeffSum.Module
