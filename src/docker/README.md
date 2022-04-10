@@ -8,9 +8,13 @@ The following code snippets pair with [this blog post]() where I cover configure
 
 The post comments on the use of the following files:
 
-:small-orange-diamond: ***docker-compose.yml***
-:small-orange-diamond: ***wsl.conf***
-:small-orange-diamond: ***.wslconfig***
+- [x] :small-orange-diamond: ***docker-compose.yml***
+- [x] :small-orange-diamond: ***wsl.conf***
+- [x] :small-orange-diamond: ***.wslconfig***
+
+A gist exists [here](https://gist.github.com/bearandhammer/0103f70b95a68ff19fd1165d57b91591) if you don't want to copy the code in the below snippets, preferring a downloadable zip of files instead. Double check that the files fit naming conventions for the targeting tools before use, which, at the time of writing, they do. 
+
+***NOTE: The `docker-compose.yml` file contains placeholder strings (denoted by `{}`) which require replacing before use.***
 
 ## Code Snippets
 
