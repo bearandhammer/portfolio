@@ -18,7 +18,7 @@ The post comments on the use of the following files:
 - [x] :small_orange_diamond: Get under fourteen stone in weight (first time in a fair few years!).
 - [ ] :small_orange_diamond: Complete twenty five 5k runs.
 - [ ] :small_orange_diamond: Complete a 5k run in under thirty six minutes.
-- [ ] :small_orange_diamond: Reach 13.5 stone.
+- [ ] :small_orange_diamond: ***Reach 13.5 stone.***
 
 ## Code Snippets
 
