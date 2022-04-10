@@ -18,25 +18,37 @@ A gist exists [here](https://gist.github.com/bearandhammer/0103f70b95a68ff19fd11
 
 ## Code Snippets
 
+Install WSL 2 (Ubuntu distribution) on Windows:
+
 ```shell
 wsl --install -d ubuntu
 ```
+
+Check WSL Ubuntu version:
 
 ```shell
 wsl -l -v
 ```
 
+Update WSL Ubuntu to version 2, if required:
+
 ```shell
 wsl --set-version Ubuntu 2
 ```
+
+Remove all existing Docker components before a clean Docker Engine install:
 
 ```bash
 sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
+Resynchronise `apt` package indexes from source (refresh), before any new operations are performed:
+
 ```bash
 sudo apt-get update
 ```
+
+Allow `apt` to use a repository over https:
 
 ```bash
 sudo apt-get install \
@@ -46,9 +58,13 @@ sudo apt-get install \
     lsb-release
 ```
 
+Install the official Docker GPG key:
+
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 ```
+
+Configure a ***stable*** Docker repository:
 
 ```bash
 echo \
@@ -56,61 +72,91 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
+Update the `apt` package index:
+
 ```bash
 sudo apt-get update
 ```
+
+Install the latest version of the Docker Engine:
 
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
+Start the Docker service:
+
 ```bash
 sudo service docker start
 ```
+
+Check the version of Docker installed:
 
 ```bash
 docker -v
 ```
 
+Pull and run the `hello-world` Image (to test a Docker installation):
+
 ```bash
 docker run hello-world
 ```
+
+Create a Docker group:
 
 ```bash
 sudo groupadd docker
 ```
 
+Add a user to the Docker group:
+
 ```bash
 sudo usermod -aG docker $USER
 ```
 
+Pull the SQL Server 2017 latest Docker Image:
+
 ```bash
-docker pull mcr.microsopft.com/mssql/server:2017-latest
+docker pull mcr.microsoft.com/mssql/server:2017-latest
 ```
+
+List all pulled Docker Images:
 
 ```bash
 docker image ls
 ```
 
+Spin up a new Container using the SQL Server 2017 Image:
+
 ```bash
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD={YOUR_STRONG_PASSWORD}" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 ```
+
+List all running Containers:
 
 ```bash
 docker container ls
 ```
 
+List all Containers:
+
 ```bash
 docker container ls -a
 ```
+
+Install Docker Compose:
 
 ```bash
 sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 ```
 
+Apply executable permissions to the Docker Compose binary:
+
 ```bash
 sudo chmod +x /usr/local/bin/docker-compose
 ```
+
+Sample Docker Compose to configure SQL 2017, MongoDB and Mongo Express:
 
 ```yml
 version: '3.1'
@@ -147,22 +193,32 @@ services:
       - mongo
 ```
 
+Access Windows folder as `mnt` from bash (Ubuntu):
+
 ```bash
 cd /mnt/c/dockercompose
 ```
+
+Execute a Docker Compose file (with the standard name of `docker-compose.yml`):
 
 ```bash
 docker-compose up
 ```
 
+Grant permissions to a UNIX user to modify directories (swap in user for `$USER`):
+
 ```bash
-sudo chown -R myuser /path/to/folder
+sudo chown -R $USER /etc
 ```
+
+Sample `wsl.conf` file:
 
 ```text
 [boot]
 command = service docker start
 ```
+
+Sample `.wslconfig` file:
 
 ```text
 # Settings apply across all Linux distros running on WSL 2
