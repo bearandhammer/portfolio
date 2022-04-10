@@ -8,17 +8,9 @@ The following code snippets pair with [this blog post]() where I cover configure
 
 The post comments on the use of the following files:
 
-- [x] :small-orange-diamond: `docker-compose.yml` 
-- [x] :small-orange-diamond: `wsl.conf`
-- [x] :small-orange-diamond: `.wslconfig`
-
-- [x] :small_orange_diamond: Running for 40 minutes (extending C25K). Working towards a full 5K run (just shy!). :date: 20th March 2022.
-- [x] :small_orange_diamond: 5K run completed (38m 30s). :date: 23rd March 2022.
-- [x] :small_orange_diamond: Complete three 5k runs in one week (seven day period). :date: 28th March 2022
-- [x] :small_orange_diamond: Get under fourteen stone in weight (first time in a fair few years!).
-- [ ] :small_orange_diamond: Complete twenty five 5k runs.
-- [ ] :small_orange_diamond: Complete a 5k run in under thirty six minutes.
-- [ ] :small_orange_diamond: ***Reach 13.5 stone.***
+:small-orange-diamond: ***docker-compose.yml***
+:small-orange-diamond: ***wsl.conf***
+:small-orange-diamond: ***.wslconfig***
 
 ## Code Snippets
 
