@@ -249,7 +249,7 @@ localhostforwarding=true
 debugConsole=true
 ```
 
-## Utility Snippets (not mentioned in post)
+## Utility Snippets
 
 Install a toolkit for making network changes for the Linux kernel:
 
