@@ -8,9 +8,9 @@ The following code snippets pair with [this blog post]() where I cover configure
 
 The post comments on the use of the following files:
 
-- [x] :small-orange-diamond: docker-compose.yml
-- [x] :small-orange-diamond: wsl.conf
-- [x] :small-orange-diamond: .wslconfig
+- docker-compose.yml
+- wsl.conf
+- .wslconfig
 
 A gist exists [here](https://gist.github.com/bearandhammer/0103f70b95a68ff19fd1165d57b91591) if you don't want to copy the code in the below snippets, preferring a downloadable zip of files instead. Double check that the files fit naming conventions for the targeting tools before use, which, at the time of writing, they do. 
 
