@@ -144,6 +144,18 @@ List all Containers:
 docker container ls -a
 ```
 
+Remove Docker Container (forced - switch in your Container name in place of `{NAME}`):
+
+```bash
+docker container rm {NAME} -f
+```
+
+Remove Docker Image (switch in your Image name in place of `{NAME}`):
+
+```bash
+docker image rm {NAME}
+```
+
 Install Docker Compose:
 
 ```bash
