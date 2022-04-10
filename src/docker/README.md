@@ -8,9 +8,9 @@ The following code snippets pair with [this blog post]() where I cover configure
 
 The post comments on the use of the following files:
 
-:small-orange-diamond: `docker-compose.yml` 
-:small-orange-diamond: `wsl.conf`
-:small-orange-diamond: `.wslconfig`
+- [x] :small-orange-diamond: `docker-compose.yml` 
+- [x] :small-orange-diamond: `wsl.conf`
+- [x] :small-orange-diamond: `.wslconfig`
 
 ## Code Snippets
 
