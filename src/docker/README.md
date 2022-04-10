@@ -1,6 +1,18 @@
 # WSL 2 for Windows and Docker Engine Support
 
+## Introduction
+
 The following code snippets pair with [this blog post]() where I cover configured WSL 2 on Window and the go through configuring the Docker Engine without the need for Docker Desktop. The headings for each section match those included in the post, in exactly the same order (for ease of consumption).
+
+## Utility Files (as Gists)
+
+The post comments on the use of the following files:
+
+:small-orange-diamond: `docker-compose.yml` 
+:small-orange-diamond: `wsl.conf`
+:small-orange-diamond: `.wslconfig`
+
+## Code Snippets
 
 ```shell
 wsl --install -d ubuntu
