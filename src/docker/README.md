@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The following code snippets pair with [this blog post]() where I cover configuring WSL 2 on Windows and the go through configuring the Docker Engine without the need for Docker Desktop. The headings for each section match those included in the post, in exactly the same order (for ease of consumption).
+The following code snippets pair with [this blog post](https://bearandhammer.net/2022/04/11/the-wonderland-of-wsl-2-for-windows-and-docker-engine-support/) where I cover configuring WSL 2 on Windows and the go through configuring the Docker Engine without the need for Docker Desktop. The headings for each section match those included in the post, in exactly the same order (for ease of consumption).
 
 ## Utility Files (as Gists)
 
