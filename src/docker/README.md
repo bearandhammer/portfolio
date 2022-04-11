@@ -18,6 +18,8 @@ A gist exists [here](https://gist.github.com/bearandhammer/0103f70b95a68ff19fd11
 
 ## Code Snippets
 
+### Install WSL 2 (Ubuntu)
+
 Install WSL 2 (Ubuntu distribution) on Windows:
 
 ```shell
@@ -35,6 +37,8 @@ Update WSL Ubuntu to version 2, if required:
 ```shell
 wsl --set-version Ubuntu 2
 ```
+
+### Setup a Docker Repository
 
 Remove all existing Docker components before a clean Docker Engine install:
 
@@ -72,6 +76,8 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
+### Install the Docker Engine
+
 Update the `apt` package index:
 
 ```bash
@@ -102,6 +108,8 @@ Pull and run the `hello-world` Image (to test a Docker installation):
 docker run hello-world
 ```
 
+### Manage Docker as a Non-Root User
+
 Create a Docker group:
 
 ```bash
@@ -113,6 +121,8 @@ Add a user to the Docker group:
 ```bash
 sudo usermod -aG docker $USER
 ```
+
+### Spin up a SQL Server 2017 (Latest) Container
 
 Pull the SQL Server 2017 latest Docker Image:
 
@@ -144,6 +154,8 @@ List all Containers:
 docker container ls -a
 ```
 
+### Image and Container Deletion
+
 Remove Docker Container (forced - switch in your Container name in place of `{NAME}`):
 
 ```bash
@@ -155,6 +167,8 @@ Remove Docker Image (switch in your Image name in place of `{NAME}`):
 ```bash
 docker image rm {NAME}
 ```
+
+### Switch Up to using Docker Compose
 
 Install Docker Compose:
 
@@ -217,6 +231,8 @@ Execute a Docker Compose file (with the standard name of `docker-compose.yml`):
 docker-compose up
 ```
 
+### WSL Refinements
+
 Grant permissions to a UNIX user to modify directories (swap in user for `$USER`):
 
 ```bash
@@ -249,7 +265,7 @@ localhostforwarding=true
 debugConsole=true
 ```
 
-## Utility Snippets
+### Bonus - Extra Tooling
 
 Install a toolkit for making network changes for the Linux kernel:
 
