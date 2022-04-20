@@ -108,6 +108,12 @@ Pull and run the `hello-world` Image (to test a Docker installation):
 docker run hello-world
 ```
 
+Adjust permissions on `docker.sock` file if a `Got permission denied while trying to connect to the Docker daemon socket` error is thrown:
+
+```bash
+sudo chmod 666 /var/run/docker.sock
+```
+
 ### Manage Docker as a Non-Root User
 
 Create a Docker group:
