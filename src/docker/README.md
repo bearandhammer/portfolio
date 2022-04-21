@@ -110,7 +110,7 @@ Create a Docker group:
 sudo groupadd docker
 ```
 
-Add a user to the Docker group (swap in user for `$USER` - ensure you use CTRL+D after this command to close WSL, in order for the changes to take effect. Then create a new WSL terminal to continue):
+Add a user to the Docker group (swap in user for `$USER` - ensure you use `CTRL+D` after this command to close WSL, in order for the changes to take effect. Then create a new WSL terminal to continue):
 
 ```bash
 sudo usermod -aG docker $USER
