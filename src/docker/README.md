@@ -235,10 +235,10 @@ docker-compose up
 
 ### WSL Refinements
 
-Grant permissions to a UNIX user to modify directories (swap in user for `$USER`):
+Grant permissions to users to modify the `/etc` directory:
 
 ```bash
-sudo chown -R $USER /etc
+sudo chmod a+rwx /etc
 ```
 
 Sample `wsl.conf` file:
