@@ -116,6 +116,12 @@ Add a user to the Docker group (ensure you use `CTRL+D` after this command to cl
 sudo usermod -aG docker $USER
 ```
 
+Manually trigger group changes (but log out anyway if this doesn't work):
+
+```bash
+newgrp docker
+```
+
 ### Verify Docker Engine Installation
 
 Pull and run the `hello-world` Image (to test a Docker installation):
@@ -265,6 +271,22 @@ localhostforwarding=true
 
 # Turns on output console showing contents of dmesg when opening a WSL 2 distro for debugging
 debugConsole=true
+```
+
+### Uh-oh - But I am on Windows 10
+
+Grant permissions to change the `profile` file (linux file system):
+
+```bash
+sudo chmod a+rwx /etc/profile
+```
+
+Ensure docker starts when WSL does on Windows 10 (add the to the `profile` file):
+
+```bash
+if service docker status 2>&1 | grep -q "is not running"; then
+    wsl.exe -d "Ubuntu" -u root -e /usr/sbin/service docker start >/dev/null 2>&1
+fi
 ```
 
 ### Bonus - Extra Tooling
