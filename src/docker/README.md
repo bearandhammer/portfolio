@@ -102,18 +102,6 @@ Check the version of Docker installed:
 docker -v
 ```
 
-Pull and run the `hello-world` Image (to test a Docker installation):
-
-```bash
-docker run hello-world
-```
-
-Adjust permissions on `docker.sock` file if a `Got permission denied while trying to connect to the Docker daemon socket` error is thrown:
-
-```bash
-sudo chmod 666 /var/run/docker.sock
-```
-
 ### Manage Docker as a Non-Root User
 
 Create a Docker group:
@@ -122,10 +110,18 @@ Create a Docker group:
 sudo groupadd docker
 ```
 
-Add a user to the Docker group (swap in user for `$USER`):
+Add a user to the Docker group (swap in user for `$USER` - ensure you use CTRL+D after this command to close WSL, in order for the changes to take effect. Then create a new WSL terminal to continue):
 
 ```bash
 sudo usermod -aG docker $USER
+```
+
+### Verify Docker Engine Installation
+
+Pull and run the `hello-world` Image (to test a Docker installation):
+
+```bash
+docker run hello-world
 ```
 
 ### Spin up a SQL Server 2017 (Latest) Container
