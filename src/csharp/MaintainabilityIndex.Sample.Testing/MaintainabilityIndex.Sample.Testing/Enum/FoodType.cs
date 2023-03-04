@@ -11,6 +11,12 @@
         Sandwiches = 3,
         Vegetable = 4,
         Fruit = 5,
-        Pasta = 6
+        Pasta = 6,
+        Cake = 7,
+        Milkshake = 8,
+        Grain = 9,
+        RobocopBabyFood = 10,
+        AlienCremeBrulee = 11,
+        PushPop = 12
     }
 }
