@@ -102,12 +102,6 @@ Check the version of Docker installed:
 docker -v
 ```
 
-Pull and run the `hello-world` Image (to test a Docker installation):
-
-```bash
-docker run hello-world
-```
-
 ### Manage Docker as a Non-Root User
 
 Create a Docker group:
@@ -116,10 +110,24 @@ Create a Docker group:
 sudo groupadd docker
 ```
 
-Add a user to the Docker group (swap in user for `$USER`):
+Add a user to the Docker group (ensure you use `CTRL+D` after this command to close WSL, in order for the changes to take effect. Then create a new WSL terminal to continue):
 
 ```bash
 sudo usermod -aG docker $USER
+```
+
+Manually trigger group changes (but log out anyway if this doesn't work):
+
+```bash
+newgrp docker
+```
+
+### Verify Docker Engine Installation
+
+Pull and run the `hello-world` Image (to test a Docker installation):
+
+```bash
+docker run hello-world
 ```
 
 ### Spin up a SQL Server 2017 (Latest) Container
@@ -233,10 +241,10 @@ docker-compose up
 
 ### WSL Refinements
 
-Grant permissions to a UNIX user to modify directories (swap in user for `$USER`):
+Grant permissions to users to modify the `/etc` directory:
 
 ```bash
-sudo chown -R $USER /etc
+sudo chmod a+rwx /etc
 ```
 
 Sample `wsl.conf` file:
@@ -263,6 +271,22 @@ localhostforwarding=true
 
 # Turns on output console showing contents of dmesg when opening a WSL 2 distro for debugging
 debugConsole=true
+```
+
+### Uh-oh - But I am on Windows 10
+
+Grant permissions to change the `profile` file (linux file system):
+
+```bash
+sudo chmod a+rwx /etc/profile
+```
+
+Ensure docker starts when WSL does on Windows 10 (add the to the `profile` file):
+
+```bash
+if service docker status 2>&1 | grep -q "is not running"; then
+    wsl.exe -d "Ubuntu" -u root -e /usr/sbin/service docker start >/dev/null 2>&1
+fi
 ```
 
 ### Bonus - Extra Tooling
