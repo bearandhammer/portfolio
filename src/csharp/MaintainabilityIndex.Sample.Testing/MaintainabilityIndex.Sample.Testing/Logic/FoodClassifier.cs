@@ -31,6 +31,8 @@
                         return FoodType.Vegetable;
                     else if (foodToClassify.InternalRef == "F" || foodToClassify.InternalRef == "FR")
                         return FoodType.Fruit;
+                    else if (foodToClassify.InternalRef == "P" || foodToClassify.InternalRef == "PA")
+                        return FoodType.Pasta;
                     else if (foodToClassify.InternalRef == "C" || foodToClassify.InternalRef == "CK")
                         return FoodType.Cake;
                     else if (foodToClassify.InternalRef == "M" || foodToClassify.InternalRef == "MS")
@@ -44,32 +46,32 @@
             else
             {
                 // Bug two - null reference exception
-                string internalFoodRef = foodToClassify.ExternalSupplierRef.ToUpper();
+                string externalSupplierFoodRef = foodToClassify.ExternalSupplierRef.ToUpper();
 
                 // Bug three - pasta can be misclassified as biscuits
-                if (internalFoodRef.Contains("BIS") || internalFoodRef.Contains("AF00"))
+                if (externalSupplierFoodRef.Contains("BIS") || externalSupplierFoodRef.Contains("AF00"))
                     return FoodType.Biscuits;
-                else if (internalFoodRef.Contains("DOUGH") || internalFoodRef.Contains("AF01"))
+                else if (externalSupplierFoodRef.Contains("DOUGH") || externalSupplierFoodRef.Contains("AF01"))
                     return FoodType.Doughnuts;
-                else if (internalFoodRef.Contains("SAND") || internalFoodRef.Contains("AF02"))
+                else if (externalSupplierFoodRef.Contains("SAND") || externalSupplierFoodRef.Contains("AF02"))
                     return FoodType.Sandwiches;
-                else if (internalFoodRef.Contains("VEGE") || internalFoodRef.Contains("AF03"))
+                else if (externalSupplierFoodRef.Contains("VEGE") || externalSupplierFoodRef.Contains("AF03"))
                     return FoodType.Vegetable;
-                else if (internalFoodRef.Contains("FRU") || internalFoodRef.Contains("AF04"))
+                else if (externalSupplierFoodRef.Contains("FRU") || externalSupplierFoodRef.Contains("AF04"))
                     return FoodType.Fruit;
-                else if (internalFoodRef.Contains("PAS") || internalFoodRef.Contains("AF001"))
+                else if (externalSupplierFoodRef.Contains("PAS") || externalSupplierFoodRef.Contains("AF001"))
                     return FoodType.Pasta;
-                else if (internalFoodRef.Contains("CAK") || internalFoodRef.Contains("CAK01") || internalFoodRef.Contains("AF05"))
+                else if (externalSupplierFoodRef.Contains("CAK") || externalSupplierFoodRef.Contains("CAKE01") || externalSupplierFoodRef.Contains("AF05"))
                     return FoodType.Cake;
-                else if (internalFoodRef.Contains("MIL") || internalFoodRef.Contains("MISHK") || internalFoodRef.Contains("AF06"))
+                else if (externalSupplierFoodRef.Contains("MIL") || externalSupplierFoodRef.Contains("MISHK") || externalSupplierFoodRef.Contains("AF06"))
                     return FoodType.Milkshake;
-                else if (internalFoodRef.Contains("GRA") || internalFoodRef.Contains("AF07"))
+                else if (externalSupplierFoodRef.Contains("GRA") || externalSupplierFoodRef.Contains("AF07"))
                     return FoodType.Grain;
-                else if (internalFoodRef.Contains("ROBO") || internalFoodRef.Contains("ROBCOP") || internalFoodRef.Contains("RBCPBF") || internalFoodRef.Contains("AF08"))
+                else if (externalSupplierFoodRef.Contains("ROBO") || externalSupplierFoodRef.Contains("ROBCOP") || externalSupplierFoodRef.Contains("RBCPBF") || externalSupplierFoodRef.Contains("AF08"))
                     return FoodType.RobocopBabyFood;
-                else if (internalFoodRef.Contains("ACB") || internalFoodRef.Contains("AF09"))
+                else if (externalSupplierFoodRef.Contains("ACB") || externalSupplierFoodRef.Contains("AF09"))
                     return FoodType.AlienCremeBrulee;
-                else if (internalFoodRef.Contains("PUSHP") || internalFoodRef.Contains("AF10"))
+                else if (externalSupplierFoodRef.Contains("PUSHP") || externalSupplierFoodRef.Contains("AF10"))
                     return FoodType.PushPop;
             }
 
@@ -105,6 +107,8 @@
                     return FoodType.Vegetable;
                 else if (foodToClassify.InternalRef == "F" || foodToClassify.InternalRef == "FR")
                     return FoodType.Fruit;
+                else if (foodToClassify.InternalRef == "P" || foodToClassify.InternalRef == "PA")
+                    return FoodType.Pasta;
                 else if (foodToClassify.InternalRef == "C" || foodToClassify.InternalRef == "CK")
                     return FoodType.Cake;
                 else if (foodToClassify.InternalRef == "M" || foodToClassify.InternalRef == "MS")
@@ -117,32 +121,32 @@
             else
             {
                 // Bug two - null reference exception
-                string internalFoodRef = foodToClassify.ExternalSupplierRef.ToUpper();
+                string externalSupplierFoodRef = foodToClassify.ExternalSupplierRef.ToUpper();
 
                 // Bug three - pasta can be misclassified as biscuits
-                if (internalFoodRef.Contains("BIS") || internalFoodRef.Contains("AF00"))
+                if (externalSupplierFoodRef.Contains("BIS") || externalSupplierFoodRef.Contains("AF00"))
                     return FoodType.Biscuits;
-                else if (internalFoodRef.Contains("DOUGH") || internalFoodRef.Contains("AF01"))
+                else if (externalSupplierFoodRef.Contains("DOUGH") || externalSupplierFoodRef.Contains("AF01"))
                     return FoodType.Doughnuts;
-                else if (internalFoodRef.Contains("SAND") || internalFoodRef.Contains("AF02"))
+                else if (externalSupplierFoodRef.Contains("SAND") || externalSupplierFoodRef.Contains("AF02"))
                     return FoodType.Sandwiches;
-                else if (internalFoodRef.Contains("VEGE") || internalFoodRef.Contains("AF03"))
+                else if (externalSupplierFoodRef.Contains("VEGE") || externalSupplierFoodRef.Contains("AF03"))
                     return FoodType.Vegetable;
-                else if (internalFoodRef.Contains("FRU") || internalFoodRef.Contains("AF04"))
+                else if (externalSupplierFoodRef.Contains("FRU") || externalSupplierFoodRef.Contains("AF04"))
                     return FoodType.Fruit;
-                else if (internalFoodRef.Contains("PAS") || internalFoodRef.Contains("AF001"))
+                else if (externalSupplierFoodRef.Contains("PAS") || externalSupplierFoodRef.Contains("AF001"))
                     return FoodType.Pasta;
-                else if (internalFoodRef.Contains("CAK") || internalFoodRef.Contains("CAK01") || internalFoodRef.Contains("AF05"))
+                else if (externalSupplierFoodRef.Contains("CAK") || externalSupplierFoodRef.Contains("CAKE01") || externalSupplierFoodRef.Contains("AF05"))
                     return FoodType.Cake;
-                else if (internalFoodRef.Contains("MIL") || internalFoodRef.Contains("MISHK") || internalFoodRef.Contains("AF06"))
+                else if (externalSupplierFoodRef.Contains("MIL") || externalSupplierFoodRef.Contains("MISHK") || externalSupplierFoodRef.Contains("AF06"))
                     return FoodType.Milkshake;
-                else if (internalFoodRef.Contains("GRA") || internalFoodRef.Contains("AF07"))
+                else if (externalSupplierFoodRef.Contains("GRA") || externalSupplierFoodRef.Contains("AF07"))
                     return FoodType.Grain;
-                else if (internalFoodRef.Contains("ROBO") || internalFoodRef.Contains("ROBCOP") || internalFoodRef.Contains("RBCPBF") || internalFoodRef.Contains("AF08"))
+                else if (externalSupplierFoodRef.Contains("ROBO") || externalSupplierFoodRef.Contains("ROBCOP") || externalSupplierFoodRef.Contains("RBCPBF") || externalSupplierFoodRef.Contains("AF08"))
                     return FoodType.RobocopBabyFood;
-                else if (internalFoodRef.Contains("ACB") || internalFoodRef.Contains("AF09"))
+                else if (externalSupplierFoodRef.Contains("ACB") || externalSupplierFoodRef.Contains("AF09"))
                     return FoodType.AlienCremeBrulee;
-                else if (internalFoodRef.Contains("PUSHP") || internalFoodRef.Contains("AF10"))
+                else if (externalSupplierFoodRef.Contains("PUSHP") || externalSupplierFoodRef.Contains("AF10"))
                     return FoodType.PushPop;
             }
 
