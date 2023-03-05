@@ -74,6 +74,13 @@ namespace MaintainabilityIndex.Sample.Testing
                 .Should()
                 .Be(expectedFoodType);
 
+        [Theory]
+        [MemberData(nameof(GetFoodTypeSampleData))]
+        public void GetFoodTypeSampleSeven_Data_Test(Food foodUnderTest, FoodType expectedFoodType) =>
+             foodClassifier.GetFoodTypeSampleSeven(foodUnderTest)
+                 .Should()
+                 .Be(expectedFoodType);
+
         private static IEnumerable<object[]> GetFoodsWithExternalSupplierRefData()
         {
             yield return new object[] { new Food { ExternalSupplierRef = "bis" }, FoodType.Biscuits };
