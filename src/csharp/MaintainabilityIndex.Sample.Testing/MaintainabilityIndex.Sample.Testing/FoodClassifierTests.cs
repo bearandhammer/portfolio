@@ -45,6 +45,35 @@ namespace MaintainabilityIndex.Sample.Testing
                 .Should()
                 .Be(expectedFoodType);
 
+        // Null reference exceptions fixed, still sub-optimal
+        [Theory]
+        [MemberData(nameof(GetFoodTypeSampleData))]
+        public void GetFoodTypeSampleThree_Data_Test(Food foodUnderTest, FoodType expectedFoodType) =>
+            foodClassifier.GetFoodTypeSampleThree(foodUnderTest)
+                .Should()
+                .Be(expectedFoodType);
+
+        [Theory]
+        [MemberData(nameof(GetFoodTypeSampleData))]
+        public void GetFoodTypeSampleFour_Data_Test(Food foodUnderTest, FoodType expectedFoodType) =>
+            foodClassifier.GetFoodTypeSampleFour(foodUnderTest)
+                .Should()
+                .Be(expectedFoodType);
+
+        [Theory]
+        [MemberData(nameof(GetFoodTypeSampleData))]
+        public void GetFoodTypeSampleFive_Data_Test(Food foodUnderTest, FoodType expectedFoodType) =>
+            foodClassifier.GetFoodTypeSampleFive(foodUnderTest)
+                .Should()
+                .Be(expectedFoodType);
+
+        [Theory]
+        [MemberData(nameof(GetFoodTypeSampleData))]
+        public void GetFoodTypeSampleSix_Data_Test(Food foodUnderTest, FoodType expectedFoodType) =>
+            foodClassifier.GetFoodTypeSampleSix(foodUnderTest)
+                .Should()
+                .Be(expectedFoodType);
+
         private static IEnumerable<object[]> GetFoodsWithExternalSupplierRefData()
         {
             yield return new object[] { new Food { ExternalSupplierRef = "bis" }, FoodType.Biscuits };
@@ -54,11 +83,11 @@ namespace MaintainabilityIndex.Sample.Testing
             yield return new object[] { new Food { ExternalSupplierRef = "sand" }, FoodType.Sandwiches };
             yield return new object[] { new Food { ExternalSupplierRef = "af02" }, FoodType.Sandwiches };
             yield return new object[] { new Food { ExternalSupplierRef = "vege" }, FoodType.Vegetable };
-            yield return new object[] { new Food { ExternalSupplierRef = "af04" }, FoodType.Vegetable };
+            yield return new object[] { new Food { ExternalSupplierRef = "af03" }, FoodType.Vegetable };
             yield return new object[] { new Food { ExternalSupplierRef = "fru" }, FoodType.Fruit };
             yield return new object[] { new Food { ExternalSupplierRef = "af04" }, FoodType.Fruit };
             yield return new object[] { new Food { ExternalSupplierRef = "pas" }, FoodType.Pasta };
-            yield return new object[] { new Food { ExternalSupplierRef = "af001" }, FoodType.Pasta };
+            yield return new object[] { new Food { ExternalSupplierRef = "af010" }, FoodType.Pasta };
             yield return new object[] { new Food { ExternalSupplierRef = "cak" }, FoodType.Cake };
             yield return new object[] { new Food { ExternalSupplierRef = "cake01" }, FoodType.Cake };
             yield return new object[] { new Food { ExternalSupplierRef = "af05" }, FoodType.Cake };
@@ -69,7 +98,7 @@ namespace MaintainabilityIndex.Sample.Testing
             yield return new object[] { new Food { ExternalSupplierRef = "af07" }, FoodType.Grain };
             yield return new object[] { new Food { ExternalSupplierRef = "robo" }, FoodType.RobocopBabyFood };
             yield return new object[] { new Food { ExternalSupplierRef = "robcop" }, FoodType.RobocopBabyFood };
-            yield return new object[] { new Food { ExternalSupplierRef = "rbcpfb" }, FoodType.RobocopBabyFood };
+            yield return new object[] { new Food { ExternalSupplierRef = "rbcpbf" }, FoodType.RobocopBabyFood };
             yield return new object[] { new Food { ExternalSupplierRef = "af08" }, FoodType.RobocopBabyFood };
             yield return new object[] { new Food { ExternalSupplierRef = "acb" }, FoodType.AlienCremeBrulee };
             yield return new object[] { new Food { ExternalSupplierRef = "af09" }, FoodType.AlienCremeBrulee };
