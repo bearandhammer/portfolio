@@ -18,15 +18,15 @@ namespace MaintainabilityIndex.Sample.Testing
                 yield return foodWithInternalRefItem;
             }
 
-            //foreach (var foodWithExternalSupplierRefItem in GetFoodsWithExternalSupplierRefData())
-            //{
-            //    yield return foodWithExternalSupplierRefItem;
-            //}
+            foreach (var foodWithExternalSupplierRefItem in GetFoodsWithExternalSupplierRefData())
+            {
+                yield return foodWithExternalSupplierRefItem;
+            }
 
-            //// Nulls (for properties and at object level - should return unknown)
-            //yield return new object[] { new Food { InternalRef = null }, FoodType.Unknown };
-            //yield return new object[] { new Food { ExternalSupplierRef = null }, FoodType.Unknown };
-            //yield return new object[] { null, FoodType.Unknown };
+            // Nulls (for properties and at object level - should return unknown)
+            yield return new object[] { new Food { InternalRef = null }, FoodType.Unknown };
+            yield return new object[] { new Food { ExternalSupplierRef = null }, FoodType.Unknown };
+            yield return new object[] { null, FoodType.Unknown };
         }
 
         // Will result in failures
@@ -41,7 +41,7 @@ namespace MaintainabilityIndex.Sample.Testing
         [Theory]
         [MemberData(nameof(GetFoodTypeSampleData))]
         public void GetFoodTypeSampleTwo_Data_Test(Food foodUnderTest, FoodType expectedFoodType) =>
-            foodClassifier.GetFoodTypeSampleOne(foodUnderTest)
+            foodClassifier.GetFoodTypeSampleTwo(foodUnderTest)
                 .Should()
                 .Be(expectedFoodType);
 
