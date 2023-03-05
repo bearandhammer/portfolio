@@ -7,7 +7,7 @@
     {
         /// <summary>
         /// Gets a <see cref="FoodType"/> based on the supplied <see cref="Food"/>.
-        /// Maintainability index: 40.
+        /// Maintainability index: 39.
         /// </summary>
         /// <param name="foodToClassify">The <see cref="Food"/> to be classified.</param>
         /// <returns>A <see cref="FoodType"/> based on the supplied <see cref="Food"/>.</returns>
@@ -80,7 +80,7 @@
 
         /// <summary>
         /// Gets a <see cref="FoodType"/> based on the supplied <see cref="Food"/>.
-        /// Maintainability index: 39. It's worse!
+        /// Maintainability index: 38. It's worse!
         /// </summary>
         /// <param name="foodToClassify">The <see cref="Food"/> to be classified.</param>
         /// <returns>A <see cref="FoodType"/> based on the supplied <see cref="Food"/>.</returns>
