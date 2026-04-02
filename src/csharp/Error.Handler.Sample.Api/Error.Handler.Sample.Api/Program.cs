@@ -1,4 +1,11 @@
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog();
 
 // Add services to the container.
 
