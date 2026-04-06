@@ -1,6 +1,6 @@
 @Error.Handler.Sample.Api_HostAddress = http://localhost:5289
 
-GET {{Error.Handler.Sample.Api_HostAddress}}/weatherforecast/
+GET {{Error.Handler.Sample.Api_HostAddress}}/exercise-activities/
 Accept: application/json
 
 ###
