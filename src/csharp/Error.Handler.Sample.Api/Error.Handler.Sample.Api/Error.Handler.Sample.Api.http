@@ -1,0 +1,18 @@
+@Error.Handler.Sample.Api_HostAddress = http://localhost:5289
+
+GET {{Error.Handler.Sample.Api_HostAddress}}/exercise-activities
+Accept: application/json
+
+###
+
+POST {{Error.Handler.Sample.Api_HostAddress}}/exercise-activities
+Accept: application/json
+Content-Type: application/json
+
+{
+    "description": "A really fast walk!!!",
+    "averageHeartRate": 113,
+    "maximumHeartRate": 148
+}
+
+###
