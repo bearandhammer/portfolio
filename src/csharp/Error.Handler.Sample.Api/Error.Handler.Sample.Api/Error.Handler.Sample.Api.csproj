@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Error.Handler.Sample.Api.Repository\Error.Handler.Sample.Api.Repository.csproj" />
     <ProjectReference Include="..\Error.Handler.Sample.Api.Service\Error.Handler.Sample.Api.Service.csproj" />
   </ItemGroup>
 

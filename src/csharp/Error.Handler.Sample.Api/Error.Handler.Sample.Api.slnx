@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="Error.Handler.Sample.Api.Model/Error.Handler.Sample.Api.Model.csproj" Id="7c5c618d-41e3-4890-ac92-64348456da62" />
   <Project Path="Error.Handler.Sample.Api.Repository/Error.Handler.Sample.Api.Repository.csproj" Id="7a580b90-f775-4002-9152-fb5a2608e821" />
   <Project Path="Error.Handler.Sample.Api.Service/Error.Handler.Sample.Api.Service.csproj" Id="c8feecc7-b776-4814-bde9-9b9a785f0bba" />
   <Project Path="Error.Handler.Sample.Api/Error.Handler.Sample.Api.csproj" />

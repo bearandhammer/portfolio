@@ -11,6 +11,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Error.Handler.Sample.Api.Model\Error.Handler.Sample.Api.Model.csproj" />
     <ProjectReference Include="..\Error.Handler.Sample.Api.Repository\Error.Handler.Sample.Api.Repository.csproj" />
   </ItemGroup>
 
