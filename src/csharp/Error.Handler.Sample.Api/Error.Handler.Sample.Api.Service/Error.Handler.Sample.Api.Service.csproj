@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Mapster.DependencyInjection" Version="10.0.7" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Error.Handler.Sample.Api.Repository\Error.Handler.Sample.Api.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
