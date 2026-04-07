@@ -15,9 +15,14 @@ namespace Error.Handler.Sample.Api.Model.Entity
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the date and time when the exercise activity occurred.
+        /// Gets or sets the instant when the exercise activity started.
         /// </summary>
-        public required DateTimeOffset OccurredAt { get; set; }
+        public required DateTimeOffset StartDateTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the instant when the exercise activity ended.
+        /// </summary>
+        public required DateTimeOffset EndDateTime { get; set; }
 
         /// <summary>
         /// Gets or sets the description of the exercise activity.

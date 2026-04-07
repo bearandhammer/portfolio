@@ -12,7 +12,9 @@ Content-Type: application/json
 {
     "description": "A really fast walk!!!",
     "averageHeartRate": 113,
-    "maximumHeartRate": 148
+    "maximumHeartRate": 148,
+    "startDateTime": "2026-04-02T10:00:00+00:00",
+    "endDateTime": "2026-04-02T10:45:00+00:00"
 }
 
 ###

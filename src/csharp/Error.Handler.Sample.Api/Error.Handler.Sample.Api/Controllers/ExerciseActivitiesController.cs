@@ -1,7 +1,11 @@
-using Error.Handler.Sample.Api.Requests;
-using Error.Handler.Sample.Api.Responses;
+using Error.Handler.Sample.Api.Extensions;
+using Error.Handler.Sample.Api.Model.Validation;
+using Error.Handler.Sample.Api.Request;
+using Error.Handler.Sample.Api.Response;
 using Error.Handler.Sample.Api.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
+using OneOf;
+using OneOf.Types;
 
 namespace Error.Handler.Sample.Api.Controllers
 {
@@ -36,16 +40,11 @@ namespace Error.Handler.Sample.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ExerciseActivityResponse>> AddExerciseActivity([FromBody] AddExerciseActivityRequest addRequest)
         {
-            Guid oneOffUniqueId = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            OneOf<ExerciseActivityResponse, ConflictingExerciseActivity> result = _exerciseActivityService.AddExerciseActivity(addRequest);
 
-            // TODO: Implement service logic to obtain an ExerciseActivityResponse (awaitable). Also, implement OneOf...
-            _logger.LogInformation("Adding exercise activity: {@AddRequest}", addRequest);
-            return Ok(await Task.FromResult(
-                new ExerciseActivityResponse(
-                    oneOffUniqueId,
-                    addRequest.Description,
-                    addRequest.AverageHeartRate,
-                    addRequest.MaximumHeartRate)));
+            return result.Match<ActionResult<ExerciseActivityResponse>>(
+                exerciseActivityResponse => Ok(exerciseActivityResponse),
+                conflictingExerciseActivity => Conflict(conflictingExerciseActivity.ToProblemDetails()));
         }
 
         /// <summary>
@@ -66,7 +65,9 @@ namespace Error.Handler.Sample.Api.Controllers
                         oneOffUniqueId,
                         "A really slow walk!!!",
                         98,
-                        122),
+                        122,
+                        DateTimeOffset.Parse("2026-04-02T08:00:00+00:00"),
+                        DateTimeOffset.Parse("2026-04-02T08:45:00+00:00")),
                 }));
         }
     }

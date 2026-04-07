@@ -1,3 +1,4 @@
+using Error.Handler.Sample.Api.Extensions;
 using Error.Handler.Sample.Api.Handlers;
 using Serilog;
 
@@ -19,7 +20,14 @@ builder.Services.AddProblemDetails(configure =>
 });
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
+// Load IConfiguration from appsettings.json
+IConfigurationRoot configuration = builder
+    .Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .Build();
+
 // Add services to the container.
+builder.Services.AddServices(configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

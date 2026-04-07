@@ -44,5 +44,7 @@ namespace Error.Handler.Sample.Api.Repository.Interface
         /// </returns>
         (ExerciseActivityEntity exerciseActivity, bool successfullyUpdated) UpdateExerciseActivityInStore(
             ExerciseActivityEntity exerciseActivityToUpdate);
+
+        ExerciseActivityEntity? GetExerciseActivityFromStoreDateRange(DateTimeOffset rangeStart, DateTimeOffset rangeEnd);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Error.Handler.Sample.Api.Model.Entity;
+﻿using System.Linq;
+using Error.Handler.Sample.Api.Model.Entity;
 using Error.Handler.Sample.Api.Repository.Context;
 using Error.Handler.Sample.Api.Repository.Interface;
 using LiteDB;
@@ -62,5 +63,13 @@ namespace Error.Handler.Sample.Api.Repository.Implementation
 
             return (exerciseActivityToUpdate, successfullyUpdated);
         }
+
+        /// <inheritdoc />
+        public ExerciseActivityEntity? GetExerciseActivityFromStoreDateRange(DateTimeOffset rangeStart, DateTimeOffset rangeEnd) =>
+             _context
+                .ActivityDatabase
+                .GetCollection<ExerciseActivityEntity>(_context.CollectionName)
+                .Find(exerciseActivity => exerciseActivity.StartDateTime < rangeEnd && exerciseActivity.EndDateTime > rangeStart)
+                .FirstOrDefault();
     }
 }

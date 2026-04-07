@@ -9,8 +9,8 @@
   <ItemGroup>
     <Folder Include="Entity\" />
     <Folder Include="Context\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Requests\" />
+    <Folder Include="Response\" />
+    <Folder Include="Request\" />
   </ItemGroup>
 
 </Project>
