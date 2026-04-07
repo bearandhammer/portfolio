@@ -2,7 +2,7 @@
 
 namespace Error.Handler.Sample.Api.Service.Implementation
 {
-    internal class ExerciseActivityService : IExerciseActivityService
+    public sealed class ExerciseActivityService : IExerciseActivityService
     {
     }
 }
